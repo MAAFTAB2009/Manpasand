@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="theme-color" content="#3c5e22" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Manpasand Rate" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <meta name="author" content="Mohd Aaftab" />
   <title>Manpasand Agro Food Pvt Ltd — Price List &amp; Order Finder (15-11-2026 to 30-11-2026)</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -55,6 +62,10 @@
         </div>
 
         <div class="flex items-center gap-1.5 shrink-0">
+          <button id="installPwaBtn" type="button"
+            class="hidden px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-extrabold transition bg-amber-400 text-gray-950 hover:bg-amber-300 shadow-sm">
+            📲 Install App
+          </button>
           <button id="viewCardsBtn" type="button"
             class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#2f4d19] shadow-sm">
             Card View
@@ -1276,6 +1287,34 @@
 
     render();
     syncStickyOffset();
+
+    // PWA Install Prompt & Service Worker Registration
+    const installPwaBtn = document.getElementById('installPwaBtn');
+    let deferredInstallPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      if (installPwaBtn) {
+        installPwaBtn.classList.remove('hidden');
+      }
+    });
+
+    if (installPwaBtn) {
+      installPwaBtn.addEventListener('click', async () => {
+        if (!deferredInstallPrompt) return;
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        installPwaBtn.classList.add('hidden');
+      });
+    }
+
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
   </script>
 </body>
 </html>
