@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#3c5e22" />
+  <meta name="author" content="Mohd Aaftab" />
+  <title>Manpasand Agro Food Pvt Ltd — Price List &amp; Order Finder (15-11-2026 to 30-11-2026)</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+      background-color: #f4f7f2;
+      color: #111827;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col pb-28">
+  <!-- Sticky Mobile-First Header -->
+  <header class="bg-[#3c5e22] text-white shadow-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3">
+      <!-- Top Row: Brand & View Toggles -->
+      <div class="flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <h1 class="text-sm sm:text-xl font-extrabold tracking-tight truncate">
+              MANPASAND AGRO FOOD PVT LTD
+            </h1>
+            <span class="px-2 py-0.5 rounded-full bg-amber-400 text-gray-950 text-[10px] sm:text-xs font-extrabold tracking-wide shrink-0">
+              15-11-26 to 30-11-26
+            </span>
+          </div>
+          <p class="text-[11px] sm:text-xs text-green-100 font-medium truncate">
+            Jharkhand &amp; Namkeen Price List (Incl. GST) &bull; Made by Mohd Aaftab
+          </p>
+        </div>
+
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button id="viewCardsBtn" type="button"
+            class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#2f4d19] shadow-sm">
+            Card View
+          </button>
+          <button id="viewTableBtn" type="button"
+            class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-[#2f4d19] text-white hover:bg-[#253d13]">
+            Table View
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="mt-2 relative">
+        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input id="searchInput" type="text" autocomplete="off"
+          placeholder="Search Haldi, Mirch, Jeera, Golki, Posto, Besan, Sewai, हल्दी, #79..."
+          class="w-full pl-9 sm:pl-11 pr-16 py-2.5 rounded-xl bg-white text-gray-900 placeholder-gray-400 text-sm sm:text-base font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-300" />
+        <button id="clearSearch" type="button"
+          class="hidden absolute inset-y-0 right-1.5 my-auto h-7 px-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold">
+          Clear
+        </button>
+      </div>
+
+      <!-- Quick Filter Chips -->
+      <div id="quickChips" class="mt-2 flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-0.5">
+        <span class="text-[11px] text-green-100 font-semibold shrink-0">Quick:</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Category Tabs & Summary Bar -->
+  <div id="categoryBar" class="bg-white/95 backdrop-blur border-b border-gray-200 sticky top-[124px] z-20 shadow-xs">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex flex-col gap-1.5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+        <div id="categoryTabs" class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide"></div>
+        <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0">
+          <div id="resultSummary" class="text-xs font-bold text-gray-600"></div>
+          <button id="changedFilterBtn" type="button"
+            class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition border border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100">
+            ⚡ Rate Changes Only
+          </button>
+        </div>
+      </div>
+
+      <!-- Global Quick Margin / Bhada % Bar -->
+      <div id="globalPctBar" class="flex items-center gap-1 overflow-x-auto scrollbar-hide pt-1 border-t border-gray-100"></div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4">
+    <!-- Cards Grid -->
+    <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
+
+    <!-- Table View -->
+    <div id="tableContainer" class="hidden bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-xs sm:text-sm">
+          <thead class="bg-[#e4eedc] text-gray-900 font-bold text-[11px] uppercase">
+            <tr>
+              <th class="px-2.5 py-3 text-center">SL</th>
+              <th class="px-3 py-3 text-left">Product</th>
+              <th class="px-2.5 py-3 text-center">Unit</th>
+              <th class="px-2.5 py-3 text-center">PCS &amp; Pack</th>
+              <th class="px-2.5 py-3 text-right">RDS Landing</th>
+              <th class="px-2.5 py-3 text-right">Bag / Box Rate</th>
+              <th class="px-2.5 py-3 text-right">Per Pcs / Hanger</th>
+              <th class="px-2.5 py-3 text-right">Per KG</th>
+              <th class="px-2.5 py-3 text-center">Margin %</th>
+              <th class="px-2.5 py-3 text-right">Party Rate (+%)</th>
+              <th class="px-2.5 py-3 text-center">Total Pc</th>
+              <th class="px-2.5 py-3 text-right">MRP</th>
+              <th class="px-2.5 py-3 text-center">Scheme</th>
+              <th class="px-2.5 py-3 text-center">Order</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-gray-100 bg-white"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-14 px-4 bg-white rounded-2xl border border-dashed border-gray-300">
+      <p class="text-base sm:text-lg font-bold text-gray-800">कोई आइटम नहीं मिला (No matching products found)</p>
+      <p class="text-xs sm:text-sm text-gray-500 mt-1">Try searching "Haldi", "Mirch", "Jeera", "Golki", "Besan", "Posto", "Pasta", or "#79".</p>
+      <button id="resetAllBtn" type="button"
+        class="mt-4 px-4 py-2.5 rounded-xl bg-[#3c5e22] text-white text-sm font-bold hover:bg-[#2f4d19] shadow-sm">
+        Show All Items
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 mt-auto">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 text-xs text-gray-600 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+      <span><strong>NOTE:</strong> i) Price list includes GST (w.e.f. 15-11-2026 to 30-11-2026). &bull; ii) Query contact: <a href="tel:6297076013" class="font-bold text-[#2f4d19] underline">6297076013</a></span>
+      <span>iii) Subject to Raniganj Jurisdiction only. &bull; <strong class="text-[#2f4d19]">Made by Mohd Aaftab</strong></span>
+    </div>
+  </footer>
+
+  <!-- Floating Bottom Party Order Bar (Mobile & Desktop) -->
+  <div id="orderBottomBar" class="hidden fixed bottom-0 inset-x-0 z-40 bg-gray-900/95 backdrop-blur text-white border-t border-gray-700 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
+      <div class="min-w-0">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="orderBarCount" class="px-2 py-0.5 rounded-md bg-lime-500 text-gray-950 text-xs font-extrabold">0 Items</span>
+          <span id="orderBarTotal" class="text-base sm:text-lg font-extrabold text-amber-300 truncate">₹0.00</span>
+        </div>
+        <div id="orderBarSub" class="text-[11px] text-gray-300 truncate">Party Order Estimate (Incl. GST)</div>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button id="clearOrderBarBtn" type="button"
+          class="px-2.5 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold border border-gray-700">
+          Clear
+        </button>
+        <button id="openOrderModalBtn" type="button"
+          class="px-3.5 py-2 rounded-xl bg-lime-500 hover:bg-lime-400 text-gray-950 text-xs sm:text-sm font-extrabold shadow-md flex items-center gap-1">
+          <span>पार्टी ऑर्डर देखें / शेयर</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Party Order Slip Modal -->
+  <div id="orderModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="bg-[#3c5e22] text-white px-4 py-3 flex items-center justify-between">
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold">पार्टी ऑर्डर पर्ची (Party Order Slip)</h2>
+          <p class="text-[11px] text-green-100">Hariom Traders / Manpasand Agro Food • 15-11-26 to 30-11-26</p>
+        </div>
+        <button id="closeOrderModalBtn" type="button"
+          class="px-2.5 py-1.5 rounded-lg bg-[#2f4d19] hover:bg-[#253d13] text-white text-xs font-bold">
+          ✕ Close
+        </button>
+      </div>
+
+      <!-- 3 Party Details Inputs: Name, Address/Market, Mobile Number -->
+      <div class="p-3 bg-gray-50 border-b border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <div>
+          <label for="partyNameInput" class="block text-[11px] font-bold text-gray-700">1. Party / Shop Name (दुकान का नाम)</label>
+          <input id="partyNameInput" type="text" placeholder="e.g. Ajay Store"
+            class="mt-0.5 w-full px-2.5 py-2 rounded-lg border border-gray-300 text-xs sm:text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#3c5e22]" />
+        </div>
+        <div>
+          <label for="partyLocationInput" class="block text-[11px] font-bold text-gray-700">2. Address / Market (पता / मार्केट)</label>
+          <input id="partyLocationInput" type="text" placeholder="e.g. Sarkanda, Godda"
+            class="mt-0.5 w-full px-2.5 py-2 rounded-lg border border-gray-300 text-xs sm:text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#3c5e22]" />
+        </div>
+        <div>
+          <label for="partyMobileInput" class="block text-[11px] font-bold text-gray-700">3. Mobile Number (मोबाइल नंबर)</label>
+          <input id="partyMobileInput" type="tel" maxlength="15" placeholder="e.g. 9264426677"
+            class="mt-0.5 w-full px-2.5 py-2 rounded-lg border border-gray-300 text-xs sm:text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#3c5e22]" />
+        </div>
+      </div>
+
+      <!-- Bulk % Setter inside Cart Modal -->
+      <div class="px-3.5 py-2 bg-amber-50/80 border-b border-amber-200 flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
+        <span class="text-[11px] font-extrabold text-amber-950 shrink-0">Cart सभी आइटम %:</span>
+        <div id="cartBulkPctBar" class="flex items-center gap-1"></div>
+      </div>
+
+      <!-- Order Items List -->
+      <div id="orderModalList" class="p-3 overflow-y-auto divide-y divide-gray-100 flex-1 space-y-2"></div>
+
+      <!-- Modal Footer -->
+      <div class="p-3.5 bg-gray-50 border-t border-gray-200 space-y-2">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs">
+          <div id="orderModalBaseSummary" class="text-gray-600 font-semibold">
+            Base Rate Total: ₹0.00 • Extra Margin/Bhada: +₹0.00
+          </div>
+          <div class="flex items-center justify-between sm:justify-end gap-2">
+            <span class="text-xs font-extrabold text-gray-700 uppercase">Party Grand Total:</span>
+            <span id="orderModalGrandTotal" class="text-lg sm:text-xl font-extrabold text-[#2f4d19]">₹0.00</span>
+          </div>
+        </div>
+
+        <!-- Slip Format Toggle -->
+        <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded-lg border border-gray-200 text-xs">
+          <span class="font-bold text-gray-700">WhatsApp पर्ची में % ब्रेकडाउन दिखाएं (Hariom Traders के लिए):</span>
+          <button id="toggleSlipBreakdownBtn" type="button"
+            class="px-2.5 py-1 rounded-md text-xs font-extrabold bg-[#3c5e22] text-white">
+            Yes (Show % Details)
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button id="copyOrderBtn" type="button"
+            class="w-full py-2.5 px-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-white text-xs sm:text-sm font-bold shadow-sm">
+            📋 Copy Order Text
+          </button>
+          <button id="whatsappShareBtn" type="button"
+            class="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] text-gray-950 text-xs sm:text-sm font-extrabold shadow-sm">
+            💬 Share on WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotice" class="hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-xl bg-gray-900 text-white text-xs font-bold shadow-xl border border-gray-700">
+    Copied to clipboard!
+  </div>
+
+  <script>
+    const PRICE_LIST = [{"sl": 1, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 270, "rdsBag": 5400, "mrp": 24, "scheme": "", "perPcs": 13.5, "perKg": 270, "totalPc": 400, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 1, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 260, "oldRdsBag": 5200, "oldUnit": "50 GM", "oldPerPcs": 13, "oldPerKg": 260, "priceChange": "up"}, {"sl": 2, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 270, "rdsBag": 5400, "mrp": 48, "scheme": "", "perPcs": 27, "perKg": 270, "totalPc": 200, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 2, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 260, "oldRdsBag": 5200, "oldUnit": "100 GM", "oldPerPcs": 26, "oldPerKg": 260, "priceChange": "up"}, {"sl": 3, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi ) Jar", "unit": "100 GM", "qty": 8, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 320, "rdsBag": 2560, "mrp": 55, "scheme": "", "perPcs": 32, "perKg": 320, "totalPc": 80, "displayProduct": "Turmeric Powder ( Haldi ) Jar", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर (जार)", "pdfSl": 3, "pdfQtyText": "8 KG BOX", "oldRdsLanding": 310, "oldRdsBag": 2480, "oldUnit": "100 GM", "oldPerPcs": 31, "oldPerKg": 310, "priceChange": "up"}, {"sl": 4, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "200 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 268, "rdsBag": 5360, "mrp": 95, "scheme": "", "perPcs": 53.6, "perKg": 268, "totalPc": 100, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 4, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 258, "oldRdsBag": 5160, "oldUnit": "200 GM", "oldPerPcs": 51.6, "oldPerKg": 258, "priceChange": "up"}, {"sl": 5, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi ) Jar", "unit": "200 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 310, "rdsBag": 3100, "mrp": 105, "scheme": "", "perPcs": 62, "perKg": 310, "totalPc": 50, "displayProduct": "Turmeric Powder ( Haldi ) Jar", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर (जार)", "pdfSl": 5, "pdfQtyText": "10 KG BOX", "oldRdsLanding": "N / A", "oldRdsBag": "N / A", "oldUnit": "200 GM", "oldPerPcs": null, "oldPerKg": null, "priceChange": "new"}, {"sl": 6, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "250 GM", "qty": 10, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 268, "rdsBag": 2680, "mrp": 102, "scheme": "", "perPcs": 67, "perKg": 268, "totalPc": 40, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 6, "pdfQtyText": "10 KG BAG", "oldRdsLanding": 258, "oldRdsBag": 2580, "oldUnit": "250 GM", "oldPerPcs": 64.5, "oldPerKg": 258, "priceChange": "up"}, {"sl": 7, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 265, "rdsBag": 5300, "mrp": 235, "scheme": "", "perPcs": 132.5, "perKg": 265, "totalPc": 40, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 7, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 255, "oldRdsBag": 5100, "oldUnit": "500 GM", "oldPerPcs": 127.5, "oldPerKg": 255, "priceChange": "up"}, {"sl": 8, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi ) Jar", "unit": "500 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 300, "rdsBag": 1800, "mrp": 250, "scheme": "", "perPcs": 150, "perKg": 300, "totalPc": 12, "displayProduct": "Turmeric Powder ( Haldi ) Jar", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर (जार)", "pdfSl": 8, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 290, "oldRdsBag": 1740, "oldUnit": "500 GM", "oldPerPcs": 145, "oldPerKg": 290, "priceChange": "up"}, {"sl": 9, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "5 KG", "qty": 50, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 240, "rdsBag": 12000, "mrp": 1500, "scheme": "", "perPcs": 1200, "perKg": 240, "totalPc": 10, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 9, "pdfQtyText": "50 KG BAG", "oldRdsLanding": 240, "oldRdsBag": 12000, "oldUnit": "5 KG", "oldPerPcs": 1200, "oldPerKg": 240, "priceChange": "same"}, {"sl": 10, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "25 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 238, "rdsBag": 5950, "mrp": 7000, "scheme": "", "perPcs": 5950, "perKg": 238, "totalPc": 1, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 10, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 238, "oldRdsBag": 5950, "oldUnit": "25 KG", "oldPerPcs": 5950, "oldPerKg": 238, "priceChange": "same"}, {"sl": 11, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 310, "rdsBag": 6200, "mrp": 33, "scheme": "", "perPcs": 15.5, "perKg": 310, "totalPc": 400, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 11, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 290, "oldRdsBag": 5800, "oldUnit": "50 GM", "oldPerPcs": 14.5, "oldPerKg": 290, "priceChange": "up"}, {"sl": 12, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 308, "rdsBag": 6160, "mrp": 65, "scheme": "", "perPcs": 30.8, "perKg": 308, "totalPc": 200, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 12, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 288, "oldRdsBag": 5760, "oldUnit": "100 GM", "oldPerPcs": 28.8, "oldPerKg": 288, "priceChange": "up"}, {"sl": 13, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "200 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 307, "rdsBag": 6140, "mrp": 136, "scheme": "", "perPcs": 61.4, "perKg": 307, "totalPc": 100, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 13, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 287, "oldRdsBag": 5740, "oldUnit": "200 GM", "oldPerPcs": 57.4, "oldPerKg": 287, "priceChange": "up"}, {"sl": 14, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Red chilli Powder ( Lanka ) Jar", "unit": "200 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 350, "rdsBag": 3500, "mrp": 145, "scheme": "", "perPcs": 70, "perKg": 350, "totalPc": 50, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch ) Jar", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर (जार)", "pdfSl": 14, "pdfQtyText": "10 KG BOX", "oldRdsLanding": 330, "oldRdsBag": 3300, "oldUnit": "200 GM", "oldPerPcs": 66, "oldPerKg": 330, "priceChange": "up"}, {"sl": 15, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 305, "rdsBag": 6100, "mrp": 330, "scheme": "", "perPcs": 152.5, "perKg": 305, "totalPc": 40, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 15, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 285, "oldRdsBag": 5700, "oldUnit": "500 GM", "oldPerPcs": 142.5, "oldPerKg": 285, "priceChange": "up"}, {"sl": 16, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "5 KG", "qty": 50, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 265, "rdsBag": 13250, "mrp": 1750, "scheme": "", "perPcs": 1325, "perKg": 265, "totalPc": 10, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 16, "pdfQtyText": "50 KG BAG", "oldRdsLanding": 265, "oldRdsBag": 13250, "oldUnit": "5 KG", "oldPerPcs": 1325, "oldPerKg": 265, "priceChange": "same"}, {"sl": 17, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Cumin Powder ( Jeera )", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 420, "rdsBag": 8400, "mrp": 45, "scheme": "", "perPcs": 21, "perKg": 420, "totalPc": 400, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 17, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 390, "oldRdsBag": 7800, "oldUnit": "50 GM", "oldPerPcs": 19.5, "oldPerKg": 390, "priceChange": "up"}, {"sl": 18, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Cumin Powder ( Jeera )", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 418, "rdsBag": 8360, "mrp": 88, "scheme": "", "perPcs": 41.8, "perKg": 418, "totalPc": 200, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 18, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 388, "oldRdsBag": 7760, "oldUnit": "100 GM", "oldPerPcs": 38.8, "oldPerKg": 388, "priceChange": "up"}, {"sl": 19, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Cumin Powder ( Jeera )", "unit": "200 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 417, "rdsBag": 8340, "mrp": 175, "scheme": "", "perPcs": 83.4, "perKg": 417, "totalPc": 100, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 19, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 387, "oldRdsBag": 7740, "oldUnit": "200 GM", "oldPerPcs": 77.4, "oldPerKg": 387, "priceChange": "up"}, {"sl": 20, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Cumin Powder ( Jeera ) Jar", "unit": "200 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 460, "rdsBag": 4600, "mrp": 220, "scheme": "", "perPcs": 92, "perKg": 460, "totalPc": 50, "displayProduct": "Cumin Powder ( Jeera ) Jar", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर (जार)", "pdfSl": 20, "pdfQtyText": "10 KG BOX", "oldRdsLanding": 430, "oldRdsBag": 4300, "oldUnit": "200 GM", "oldPerPcs": 86, "oldPerKg": 430, "priceChange": "up"}, {"sl": 21, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Cumin Powder ( Jeera )", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 415, "rdsBag": 8300, "mrp": 425, "scheme": "", "perPcs": 207.5, "perKg": 415, "totalPc": 40, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 21, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 385, "oldRdsBag": 7700, "oldUnit": "500 GM", "oldPerPcs": 192.5, "oldPerKg": 385, "priceChange": "up"}, {"sl": 22, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Cumin Powder ( Jeera )", "unit": "5 KG", "qty": 50, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 405, "rdsBag": 20250, "mrp": 2000, "scheme": "", "perPcs": 2025, "perKg": 405, "totalPc": 10, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 22, "pdfQtyText": "50 KG BAG", "oldRdsLanding": 375, "oldRdsBag": 18750, "oldUnit": "5 KG", "oldPerPcs": 1875, "oldPerKg": 375, "priceChange": "up"}, {"sl": 23, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Coriander Powder ( Dhania )", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 240, "rdsBag": 4800, "mrp": 23, "scheme": "", "perPcs": 12, "perKg": 240, "totalPc": 400, "displayProduct": "Coriander Powder ( Dhaniya / Dhania )", "aliases": "dhaniya, dhania, dhaniya powder", "hindiName": "धनिया पाउडर", "pdfSl": 23, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 240, "oldRdsBag": 4800, "oldUnit": "50 GM", "oldPerPcs": 12, "oldPerKg": 240, "priceChange": "same"}, {"sl": 24, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Coriander Powder ( Dhania )", "unit": "200 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 237, "rdsBag": 4740, "mrp": 75, "scheme": "", "perPcs": 47.4, "perKg": 237, "totalPc": 100, "displayProduct": "Coriander Powder ( Dhaniya / Dhania )", "aliases": "dhaniya, dhania, dhaniya powder", "hindiName": "धनिया पाउडर", "pdfSl": 24, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 237, "oldRdsBag": 4740, "oldUnit": "200 GM", "oldPerPcs": 47.4, "oldPerKg": 237, "priceChange": "same"}, {"sl": 25, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Coriander Powder ( Dhania )", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 235, "rdsBag": 4700, "mrp": 155, "scheme": "", "perPcs": 117.5, "perKg": 235, "totalPc": 40, "displayProduct": "Coriander Powder ( Dhaniya / Dhania )", "aliases": "dhaniya, dhania, dhaniya powder", "hindiName": "धनिया पाउडर", "pdfSl": 25, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 235, "oldRdsBag": 4700, "oldUnit": "500 GM", "oldPerPcs": 117.5, "oldPerKg": 235, "priceChange": "same"}, {"sl": 26, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Coriander Powder ( Dhania )", "unit": "5 KG", "qty": 50, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 215, "rdsBag": 10750, "mrp": 1500, "scheme": "", "perPcs": 1075, "perKg": 215, "totalPc": 10, "displayProduct": "Coriander Powder ( Dhaniya / Dhania )", "aliases": "dhaniya, dhania, dhaniya powder", "hindiName": "धनिया पाउडर", "pdfSl": 26, "pdfQtyText": "50 KG BAG", "oldRdsLanding": 215, "oldRdsBag": 10750, "oldUnit": "5 KG", "oldPerPcs": 1075, "oldPerKg": 215, "priceChange": "same"}, {"sl": 27, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Mix Masala Powder", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 240, "rdsBag": 4800, "mrp": 25, "scheme": "", "perPcs": 12, "perKg": 240, "totalPc": 400, "displayProduct": "Mix Masala Powder ( Sabji / Mix Masala )", "aliases": "mix masala, sabzi masala, sabji masala", "hindiName": "मिक्स मसाला पाउडर", "pdfSl": 27, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 230, "oldRdsBag": 4600, "oldUnit": "50 GM", "oldPerPcs": 11.5, "oldPerKg": 230, "priceChange": "up"}, {"sl": 28, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Mix Masala Powder", "unit": "200 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 237, "rdsBag": 4740, "mrp": 95, "scheme": "", "perPcs": 47.4, "perKg": 237, "totalPc": 100, "displayProduct": "Mix Masala Powder ( Sabji / Mix Masala )", "aliases": "mix masala, sabzi masala, sabji masala", "hindiName": "मिक्स मसाला पाउडर", "pdfSl": 28, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 227, "oldRdsBag": 4540, "oldUnit": "200 GM", "oldPerPcs": 45.4, "oldPerKg": 227, "priceChange": "up"}, {"sl": 29, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Mix Masala Powder Jar", "unit": "200 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 280, "rdsBag": 2800, "mrp": 110, "scheme": "", "perPcs": 56, "perKg": 280, "totalPc": 50, "displayProduct": "Mix Masala Powder Jar ( Mix Masala )", "aliases": "mix masala, sabzi masala, sabji masala", "hindiName": "मिक्स मसाला पाउडर (जार)", "pdfSl": 29, "pdfQtyText": "10 KG BOX", "oldRdsLanding": 270, "oldRdsBag": 2700, "oldUnit": "200 GM", "oldPerPcs": 54, "oldPerKg": 270, "priceChange": "up"}, {"sl": 30, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Mix Masala Powder", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 235, "rdsBag": 4700, "mrp": 240, "scheme": "", "perPcs": 117.5, "perKg": 235, "totalPc": 40, "displayProduct": "Mix Masala Powder ( Sabji / Mix Masala )", "aliases": "mix masala, sabzi masala, sabji masala", "hindiName": "मिक्स मसाला पाउडर", "pdfSl": 30, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 225, "oldRdsBag": 4500, "oldUnit": "500 GM", "oldPerPcs": 112.5, "oldPerKg": 225, "priceChange": "up"}, {"sl": 31, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Mix Masala Powder", "unit": "5 KG", "qty": 50, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 225, "rdsBag": 11250, "mrp": null, "scheme": "", "perPcs": 1125, "perKg": 225, "totalPc": 10, "displayProduct": "Mix Masala Powder ( Sabji / Mix Masala )", "aliases": "mix masala, sabzi masala, sabji masala", "hindiName": "मिक्स मसाला पाउडर", "pdfSl": 31, "pdfQtyText": "50 KG BAG", "oldRdsLanding": 215, "oldRdsBag": 10750, "oldUnit": "5 KG", "oldPerPcs": 1075, "oldPerKg": 215, "priceChange": "up"}, {"sl": 32, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "25 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 900, "rdsBag": 9000, "mrp": 54, "scheme": "", "perPcs": 22.5, "perKg": 900, "totalPc": 400, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 32, "pdfQtyText": "10 KG BOX", "oldRdsLanding": 900, "oldRdsBag": 9000, "oldUnit": "25 GM", "oldPerPcs": 22.5, "oldPerKg": 900, "priceChange": "same"}, {"sl": 33, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "50 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 900, "rdsBag": 9000, "mrp": 100, "scheme": "", "perPcs": 45, "perKg": 900, "totalPc": 200, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 33, "pdfQtyText": "10 KG BOX", "oldRdsLanding": 900, "oldRdsBag": 9000, "oldUnit": "50 GM", "oldPerPcs": 45, "oldPerKg": 900, "priceChange": "same"}, {"sl": 34, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "200 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 897, "rdsBag": 17940, "mrp": 390, "scheme": "", "perPcs": 179.4, "perKg": 897, "totalPc": 100, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 34, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 897, "oldRdsBag": 17940, "oldUnit": "200 GM", "oldPerPcs": 179.4, "oldPerKg": 897, "priceChange": "same"}, {"sl": 35, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 895, "rdsBag": 17900, "mrp": 840, "scheme": "", "perPcs": 447.5, "perKg": 895, "totalPc": 40, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 35, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 895, "oldRdsBag": 17900, "oldUnit": "500 GM", "oldPerPcs": 447.5, "oldPerKg": 895, "priceChange": "same"}, {"sl": 36, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "5 KG", "qty": 50, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 885, "rdsBag": 44250, "mrp": null, "scheme": "", "perPcs": 4425, "perKg": 885, "totalPc": 10, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 36, "pdfQtyText": "50 KG BAG", "oldRdsLanding": 885, "oldRdsBag": 44250, "oldUnit": "5 KG", "oldPerPcs": 4425, "oldPerKg": 885, "priceChange": "same"}, {"sl": 37, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Kasuri Methi Patta", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 390, "rdsBag": 2340, "mrp": 70, "scheme": "", "perPcs": 19.5, "perKg": 390, "totalPc": 120, "displayProduct": "Kasuri Methi Patta", "aliases": "kasuri methi, methi patta, sukhi methi", "hindiName": "कसूरी मेथी पत्ता", "pdfSl": 37, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 390, "oldRdsBag": 2340, "oldUnit": "50 GM", "oldPerPcs": 19.5, "oldPerKg": 390, "priceChange": "same"}, {"sl": 38, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Asafoetida ( Hing )", "unit": "7 GM", "qty": 4.2, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 930, "rdsBag": 3906, "mrp": 14, "scheme": "", "perPcs": 6.51, "perKg": 930, "totalPc": 600, "displayProduct": "Asafoetida ( Hing )", "aliases": "hing, heeng", "hindiName": "हींग", "pdfSl": 38, "pdfQtyText": "4.2 KG BOX", "oldRdsLanding": 930, "oldRdsBag": 3906, "oldUnit": "7 GM", "oldPerPcs": 6.51, "oldPerKg": 930, "priceChange": "same"}, {"sl": 39, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Asafoetida ( Hing )", "unit": "50 GM", "qty": 5.4, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 900, "rdsBag": 4860, "mrp": 45, "scheme": "", "perPcs": 45, "perKg": 900, "totalPc": 108, "displayProduct": "Asafoetida ( Hing )", "aliases": "hing, heeng", "hindiName": "हींग", "pdfSl": 39, "pdfQtyText": "5.4 KG BOX", "oldRdsLanding": 900, "oldRdsBag": 4860, "oldUnit": "50 GM", "oldPerPcs": 45, "oldPerKg": 900, "priceChange": "same"}, {"sl": 40, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Tej Patta", "unit": "25 GM", "qty": 5, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 265, "rdsBag": 1325, "mrp": 13, "scheme": "", "perPcs": 6.625, "perKg": 265, "totalPc": 200, "displayProduct": "Tej Patta ( Bay Leaf )", "aliases": "tej patta, tejpatta, bay leaf", "hindiName": "तेज पत्ता", "pdfSl": 40, "pdfQtyText": "5 KG BAG", "oldRdsLanding": 265, "oldRdsBag": 1325, "oldUnit": "25 GM", "oldPerPcs": 6.625, "oldPerKg": 265, "priceChange": "same"}, {"sl": 41, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Tej Patta", "unit": "40 GM", "qty": 6, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 245, "rdsBag": 1470, "mrp": 25, "scheme": "", "perPcs": 9.8, "perKg": 245, "totalPc": 150, "displayProduct": "Tej Patta ( Bay Leaf )", "aliases": "tej patta, tejpatta, bay leaf", "hindiName": "तेज पत्ता", "pdfSl": 41, "pdfQtyText": "6 KG BAG", "oldRdsLanding": 245, "oldRdsBag": 1470, "oldUnit": "40 GM", "oldPerPcs": 9.8, "oldPerKg": 245, "priceChange": "same"}, {"sl": 42, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Tej Patta", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 225, "rdsBag": 1350, "mrp": 25, "scheme": "", "perPcs": 11.25, "perKg": 225, "totalPc": 120, "displayProduct": "Tej Patta ( Bay Leaf )", "aliases": "tej patta, tejpatta, bay leaf", "hindiName": "तेज पत्ता", "pdfSl": 42, "pdfQtyText": "6 KG BAG", "oldRdsLanding": 225, "oldRdsBag": 1350, "oldUnit": "50 GM", "oldPerPcs": 11.25, "oldPerKg": 225, "priceChange": "same"}, {"sl": 43, "sheet": "Powder Spices", "section": "BASIC ITEM", "product": "Black Salt", "unit": "100 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 45, "rdsBag": 1350, "mrp": 10, "scheme": "", "perPcs": 4.5, "perKg": 45, "totalPc": 300, "displayProduct": "Black Salt ( Kala Namak )", "aliases": "kala namak, kaala namak, sanchal", "hindiName": "काला नमक", "pdfSl": 43, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 45, "oldRdsBag": 1350, "oldUnit": "100 GM", "oldPerPcs": 4.5, "oldPerKg": 45, "priceChange": "same"}, {"sl": 44, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Kasuri Methi Patta ( BUY 1 GET 1)", "unit": "25 GM", "qty": 3.375, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 850, "rdsBag": 1434, "mrp": 29, "scheme": "", "perPcs": 10.6222, "perKg": 424.8889, "totalPc": 135, "displayProduct": "Kasuri Methi Patta ( BUY 1 GET 1)", "aliases": "kasuri methi, methi patta, sukhi methi", "hindiName": "कसूरी मेथी पत्ता (1 खरीदें 1 मुफ्त)", "pdfSl": 44, "pdfQtyText": "3.375 KG BOX", "oldRdsLanding": 830, "oldRdsBag": 1401, "oldUnit": "25 GM", "oldPerPcs": 10.3778, "oldPerKg": 415.1111, "priceChange": "up"}, {"sl": 45, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Sabji Masala ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 590, "rdsBag": 1770, "mrp": 40, "scheme": "", "perPcs": 14.75, "perKg": 295, "totalPc": 120, "displayProduct": "Sabji Masala ( BUY 1 GET 1)", "aliases": "sabji masala, sabzi masala", "hindiName": "सब्जी मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 45, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 570, "oldRdsBag": 1710, "oldUnit": "50 GM", "oldPerPcs": 14.25, "oldPerKg": 285, "priceChange": "up"}, {"sl": 46, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Chicken Curry Masala ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 830, "rdsBag": 2490, "mrp": 45, "scheme": "", "perPcs": 20.75, "perKg": 415, "totalPc": 120, "displayProduct": "Chicken Curry Masala ( BUY 1 GET 1)", "aliases": "chicken masala, murga masala, chicken curry", "hindiName": "चिकन करी मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 46, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 810, "oldRdsBag": 2430, "oldUnit": "50 GM", "oldPerPcs": 20.25, "oldPerKg": 405, "priceChange": "up"}, {"sl": 47, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Meat Masala ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 830, "rdsBag": 2490, "mrp": 45, "scheme": "", "perPcs": 20.75, "perKg": 415, "totalPc": 120, "displayProduct": "Meat Masala ( BUY 1 GET 1)", "aliases": "meat masala, mutton masala, gosht masala", "hindiName": "मीट मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 47, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 810, "oldRdsBag": 2430, "oldUnit": "50 GM", "oldPerPcs": 20.25, "oldPerKg": 405, "priceChange": "up"}, {"sl": 48, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Garam Masala ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 1430, "rdsBag": 4290, "mrp": 70, "scheme": "", "perPcs": 35.75, "perKg": 715, "totalPc": 120, "displayProduct": "Garam Masala ( BUY 1 GET 1)", "aliases": "garam masala, khada masala powder", "hindiName": "गरम मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 48, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 1410, "oldRdsBag": 4230, "oldUnit": "50 GM", "oldPerPcs": 35.25, "oldPerKg": 705, "priceChange": "up"}, {"sl": 49, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Kashmiri Lal Mirch ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 1430, "rdsBag": 4290, "mrp": 70, "scheme": "", "perPcs": 35.75, "perKg": 715, "totalPc": 120, "displayProduct": "Kashmiri Lal Mirch ( Kashmiri Lal Mirch ) ( BUY 1 GET 1)", "aliases": "kashmiri lal mirch, kashmiri mirch, deggi mirch, rang wali mirch", "hindiName": "कश्मीरी लाल मिर्च (1 खरीदें 1 मुफ्त)", "pdfSl": 49, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 1410, "oldRdsBag": 4230, "oldUnit": "50 GM", "oldPerPcs": 35.25, "oldPerKg": 705, "priceChange": "up"}, {"sl": 50, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Kitchen King ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 630, "rdsBag": 1890, "mrp": 45, "scheme": "", "perPcs": 15.75, "perKg": 315, "totalPc": 120, "displayProduct": "Kitchen King ( BUY 1 GET 1)", "aliases": "kitchen king, shahi masala", "hindiName": "किचन किंग मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 50, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 610, "oldRdsBag": 1830, "oldUnit": "50 GM", "oldPerPcs": 15.25, "oldPerKg": 305, "priceChange": "up"}, {"sl": 51, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Biryani Masala ( BUY 1 GET 1)", "unit": "50 GM", "qty": 5, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 1430, "rdsBag": 3575, "mrp": 90, "scheme": "", "perPcs": 35.75, "perKg": 715, "totalPc": 100, "displayProduct": "Biryani Masala ( BUY 1 GET 1)", "aliases": "biryani masala, pulao masala", "hindiName": "बिरयानी मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 51, "pdfQtyText": "5 KG BOX", "oldRdsLanding": 1410, "oldRdsBag": 3525, "oldUnit": "50 GM", "oldPerPcs": 35.25, "oldPerKg": 705, "priceChange": "up"}, {"sl": 52, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Aloo Dum Masala ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 1130, "rdsBag": 3390, "mrp": 60, "scheme": "", "perPcs": 28.25, "perKg": 565, "totalPc": 120, "displayProduct": "Aloo Dum Masala ( BUY 1 GET 1)", "aliases": "aloo dum, dum aloo masala", "hindiName": "आलू दम मसाला (1 खरीदें 1 मुफ्त)", "pdfSl": 52, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 1110, "oldRdsBag": 3330, "oldUnit": "50 GM", "oldPerPcs": 27.75, "oldPerKg": 555, "priceChange": "up"}, {"sl": 53, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Dalma Powder", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 430, "rdsBag": 2580, "mrp": 45, "scheme": "", "perPcs": 21.5, "perKg": 430, "totalPc": 120, "displayProduct": "Dalma Powder", "aliases": "dalma masala, dal masala", "hindiName": "दलमा पाउडर", "pdfSl": 53, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 410, "oldRdsBag": 2460, "oldUnit": "50 GM", "oldPerPcs": 20.5, "oldPerKg": 410, "priceChange": "up"}, {"sl": 54, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Curry Masala Powder", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 430, "rdsBag": 2580, "mrp": 35, "scheme": "", "perPcs": 21.5, "perKg": 430, "totalPc": 120, "displayProduct": "Curry Masala Powder", "aliases": "curry masala, tari masala", "hindiName": "करी मसाला पाउडर", "pdfSl": 54, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 410, "oldRdsBag": 2460, "oldUnit": "50 GM", "oldPerPcs": 20.5, "oldPerKg": 410, "priceChange": "up"}, {"sl": 55, "sheet": "BLENDED ITEM", "section": "BLENDED ITEM", "product": "Amchur Powder ( BUY 1 GET 1)", "unit": "50 GM", "qty": 6, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 430, "rdsBag": 1290, "mrp": null, "scheme": "", "perPcs": 10.75, "perKg": 215, "totalPc": 120, "displayProduct": "Amchur Powder ( Aamchur / Khatai ) ( BUY 1 GET 1)", "aliases": "amchur, aamchur, khatai, mango powder", "hindiName": "अमचूर पाउडर (1 खरीदें 1 मुफ्त)", "pdfSl": 55, "pdfQtyText": "6 KG BOX", "oldRdsLanding": 410, "oldRdsBag": 1230, "oldUnit": "50 GM", "oldPerPcs": 10.25, "oldPerKg": 205, "priceChange": "up"}, {"sl": 56, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Chanachur Misti (New)", "unit": "20 GM", "qty": 10.56, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 3.65, "rdsBag": 1752, "mrp": 5, "scheme": "", "perPcs": 3.65, "perKg": 182.5, "totalPc": 480, "displayProduct": "Chanachur Misti (New) ( Meetha Mixture )", "aliases": "Chanachur, meetha mixture, misti mixture, dalmoth", "hindiName": "मीठा चनाचूर / मिक्सचर", "pdfSl": 56, "pdfQtyText": "480 PCS ( 10.56 KG ) BAG", "oldRdsLanding": 3.55, "oldRdsBag": 1704, "oldUnit": "20 GM", "oldPerPcs": 3.55, "oldPerKg": 177.5, "priceChange": "up"}, {"sl": 57, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "chanachur Jhal (New)", "unit": "20 GM", "qty": 10.56, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 3.65, "rdsBag": 1752, "mrp": 5, "scheme": "", "perPcs": 3.65, "perKg": 182.5, "totalPc": 480, "displayProduct": "Chanachur Jhal (New) ( Teekha / Jhal Mixture )", "aliases": "Chanachur, jhal mixture, teekha mixture, namkeen", "hindiName": "तीखा (झाल) चनाचूर / मिक्सचर", "pdfSl": 57, "pdfQtyText": "480 PCS ( 10.56 KG ) BAG", "oldRdsLanding": 3.55, "oldRdsBag": 1704, "oldUnit": "20 GM", "oldPerPcs": 3.55, "oldPerKg": 177.5, "priceChange": "up"}, {"sl": 58, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Chanachur Misti (New)", "unit": "42 GM", "qty": 13.5, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 7.3, "rdsBag": 2190, "mrp": 10, "scheme": "", "perPcs": 7.3, "perKg": 173.8095, "totalPc": 300, "displayProduct": "Chanachur Misti (New) ( Meetha Mixture )", "aliases": "Chanachur, meetha mixture, misti mixture, dalmoth", "hindiName": "मीठा चनाचूर / मिक्सचर", "pdfSl": 58, "pdfQtyText": "300 PCS ( 13.5 KG ) BAG", "oldRdsLanding": 7.1, "oldRdsBag": 2130, "oldUnit": "42 GM", "oldPerPcs": 7.1, "oldPerKg": 169.0476, "priceChange": "up"}, {"sl": 59, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "chanachur Jhal (New)", "unit": "42 GM", "qty": 13.5, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 7.3, "rdsBag": 2190, "mrp": 10, "scheme": "", "perPcs": 7.3, "perKg": 173.8095, "totalPc": 300, "displayProduct": "Chanachur Jhal (New) ( Teekha / Jhal Mixture )", "aliases": "Chanachur, jhal mixture, teekha mixture, namkeen", "hindiName": "तीखा (झाल) चनाचूर / मिक्सचर", "pdfSl": 59, "pdfQtyText": "300 PCS ( 13.5 KG ) BAG", "oldRdsLanding": 7.1, "oldRdsBag": 2130, "oldUnit": "42 GM", "oldPerPcs": 7.1, "oldPerKg": 169.0476, "priceChange": "up"}, {"sl": 60, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Chanachur Misti (New)", "unit": "160 GM", "qty": 16, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 26, "rdsBag": 2600, "mrp": 36, "scheme": "", "perPcs": 26, "perKg": 162.5, "totalPc": 100, "displayProduct": "Chanachur Misti (New) ( Meetha Mixture )", "aliases": "Chanachur, meetha mixture, misti mixture, dalmoth", "hindiName": "मीठा चनाचूर / मिक्सचर", "pdfSl": 60, "pdfQtyText": "100 PCS ( 16 KG ) BAG", "oldRdsLanding": 26, "oldRdsBag": 2600, "oldUnit": "160 GM", "oldPerPcs": 26, "oldPerKg": 162.5, "priceChange": "same"}, {"sl": 61, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "chanachur Jhal (New)", "unit": "160 GM", "qty": 16, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 26, "rdsBag": 2600, "mrp": 36, "scheme": "", "perPcs": 26, "perKg": 162.5, "totalPc": 100, "displayProduct": "Chanachur Jhal (New) ( Teekha / Jhal Mixture )", "aliases": "Chanachur, jhal mixture, teekha mixture, namkeen", "hindiName": "तीखा (झाल) चनाचूर / मिक्सचर", "pdfSl": 61, "pdfQtyText": "100 PCS ( 16 KG ) BAG", "oldRdsLanding": 26, "oldRdsBag": 2600, "oldUnit": "160 GM", "oldPerPcs": 26, "oldPerKg": 162.5, "priceChange": "same"}, {"sl": 62, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Chanachur Misti (New)", "unit": "380 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 64, "rdsBag": 3200, "mrp": 120, "scheme": "", "perPcs": 64, "perKg": 168.4211, "totalPc": 50, "displayProduct": "Chanachur Misti (New) ( Meetha Mixture )", "aliases": "Chanachur, meetha mixture, misti mixture, dalmoth", "hindiName": "मीठा चनाचूर / मिक्सचर", "pdfSl": 62, "pdfQtyText": "50 PCS ( 20 KG ) BAG", "oldRdsLanding": 62, "oldRdsBag": 3100, "oldUnit": "380 GM", "oldPerPcs": 62, "oldPerKg": 163.1579, "priceChange": "up"}, {"sl": 63, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "chanachur Jhal (New)", "unit": "380 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 64, "rdsBag": 3200, "mrp": 120, "scheme": "", "perPcs": 64, "perKg": 168.4211, "totalPc": 50, "displayProduct": "Chanachur Jhal (New) ( Teekha / Jhal Mixture )", "aliases": "Chanachur, jhal mixture, teekha mixture, namkeen", "hindiName": "तीखा (झाल) चनाचूर / मिक्सचर", "pdfSl": 63, "pdfQtyText": "50 PCS ( 20 KG ) BAG", "oldRdsLanding": 62, "oldRdsBag": 3100, "oldUnit": "380 GM", "oldPerPcs": 62, "oldPerKg": 163.1579, "priceChange": "up"}, {"sl": 64, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Chiwda", "unit": "23 GM", "qty": 10.8, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 3.5, "rdsBag": 1512, "mrp": 5, "scheme": "", "perPcs": 3.5, "perKg": 152.1739, "totalPc": 432, "displayProduct": "Chiwda ( Chura / Poha Namkeen )", "aliases": "chiwda, chivda, chura, poha namkeen", "hindiName": "चिवड़ा / पोहा नमकीन", "pdfSl": 64, "pdfQtyText": "432 PCS ( 10.8 KG ) BAG", "oldRdsLanding": 3.5, "oldRdsBag": 1512, "oldUnit": "23 GM", "oldPerPcs": 3.5, "oldPerKg": 152.1739, "priceChange": "same"}, {"sl": 65, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Chiwda", "unit": "55 GM", "qty": 12.65, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 7.5, "rdsBag": 1725, "mrp": 10, "scheme": "", "perPcs": 7.5, "perKg": 136.3636, "totalPc": 230, "displayProduct": "Chiwda ( Chura / Poha Namkeen )", "aliases": "chiwda, chivda, chura, poha namkeen", "hindiName": "चिवड़ा / पोहा नमकीन", "pdfSl": 65, "pdfQtyText": "230 PCS ( 12.65 KG ) BAG", "oldRdsLanding": 7.5, "oldRdsBag": 1725, "oldUnit": "55 GM", "oldPerPcs": 7.5, "oldPerKg": 136.3636, "priceChange": "same"}, {"sl": 66, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Nimki", "unit": "23 GM", "qty": 9.936, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 3.5, "rdsBag": 1512, "mrp": 5, "scheme": "", "perPcs": 3.5, "perKg": 152.1739, "totalPc": 432, "displayProduct": "Nimki ( Namak Para )", "aliases": "nimki, namak para, mathri", "hindiName": "निमकी / नमकपारा", "pdfSl": 66, "pdfQtyText": "432 PCS ( 9.936 KG ) BAG", "oldRdsLanding": 3.5, "oldRdsBag": 1512, "oldUnit": "23 GM", "oldPerPcs": 3.5, "oldPerKg": 152.1739, "priceChange": "same"}, {"sl": 67, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Nimki", "unit": "55 GM", "qty": 12.65, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 7.5, "rdsBag": 1725, "mrp": 10, "scheme": "", "perPcs": 7.5, "perKg": 136.3636, "totalPc": 230, "displayProduct": "Nimki ( Namak Para )", "aliases": "nimki, namak para, mathri", "hindiName": "निमकी / नमकपारा", "pdfSl": 67, "pdfQtyText": "230 PCS ( 12.65 KG ) BAG", "oldRdsLanding": 7.5, "oldRdsBag": 1725, "oldUnit": "55 GM", "oldPerPcs": 7.5, "oldPerKg": 136.3636, "priceChange": "same"}, {"sl": 68, "sheet": "Namkeen & Hanger Items", "section": "NAMKEEN ITEM", "product": "Nimki", "unit": "400 GM", "qty": 12, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 43.33, "rdsBag": 1300, "mrp": 85, "scheme": "", "perPcs": 43.33, "perKg": 108.325, "totalPc": 30, "displayProduct": "Nimki ( Namak Para )", "aliases": "nimki, namak para, mathri", "hindiName": "निमकी / नमकपारा", "pdfSl": 68, "pdfQtyText": "30 PCS (12 KG) BOX", "oldRdsLanding": 43.33, "oldRdsBag": 1300, "oldUnit": "400 GM", "oldPerPcs": 43.3333, "oldPerKg": 108.3333, "exactPerPcs": 43.3333, "priceChange": "same"}, {"sl": 69, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "10 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 160, "rdsBag": 3200, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 69, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 137.5, "oldRdsBag": 2750, "oldUnit": "10 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 160, "freeHanger": 1, "priceChange": "up"}, {"sl": 70, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "15 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": "N / A", "rdsBag": "N / A", "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 70, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 180, "oldRdsBag": 3600, "oldUnit": "15 GM", "oldPerPcs": null, "oldPerKg": null, "priceChange": "na"}, {"sl": 71, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "10 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 180, "rdsBag": 3600, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 71, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 170, "oldRdsBag": 3400, "oldUnit": "10 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 180, "freeHanger": 1, "priceChange": "up"}, {"sl": 72, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Cumin Powder ( Jeera )", "unit": "5 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 120, "rdsBag": 2400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 72, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 120, "oldRdsBag": 2400, "oldUnit": "5 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 120, "freeHanger": 1, "priceChange": "same"}, {"sl": 73, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Coriander Powder ( Dhania )", "unit": "10 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 145, "rdsBag": 2900, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Coriander Powder ( Dhaniya / Dhania )", "aliases": "dhaniya, dhania, dhaniya powder", "hindiName": "धनिया पाउडर", "pdfSl": 73, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 140, "oldRdsBag": 2800, "oldUnit": "10 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 145, "freeHanger": 1, "priceChange": "up"}, {"sl": 74, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "3 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "", "rdsLanding": 150, "rdsBag": 3000, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 74, "pdfQtyText": "20 HANGER", "oldRdsLanding": 150, "oldRdsBag": 3000, "oldUnit": "3 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 150, "freeHanger": 0, "priceChange": "same"}, {"sl": 75, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Sabji Masala", "unit": "3.5 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 70, "rdsBag": 1400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Sabji Masala", "aliases": "sabji masala, sabzi masala", "hindiName": "सब्जी मसाला", "pdfSl": 75, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 70, "oldRdsBag": 1400, "oldUnit": "3.5 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 70, "freeHanger": 1, "priceChange": "same"}, {"sl": 76, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Chicken Curry Masala", "unit": "6 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 150, "rdsBag": 3000, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Chicken Curry Masala", "aliases": "chicken masala, murga masala, chicken curry", "hindiName": "चिकन करी मसाला", "pdfSl": 76, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 150, "oldRdsBag": 3000, "oldUnit": "6 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 150, "freeHanger": 1, "priceChange": "same"}, {"sl": 77, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Meat Masala", "unit": "6 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 150, "rdsBag": 3000, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Meat Masala", "aliases": "meat masala, mutton masala, gosht masala", "hindiName": "मीट मसाला", "pdfSl": 77, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 150, "oldRdsBag": 3000, "oldUnit": "6 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 150, "freeHanger": 1, "priceChange": "same"}, {"sl": 78, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5 /- HANGER ITEM", "product": "Garam Masala", "unit": "3.5 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 170, "rdsBag": 3400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Garam Masala", "aliases": "garam masala, khada masala powder", "hindiName": "गरम मसाला", "pdfSl": 78, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 170, "oldRdsBag": 3400, "oldUnit": "3.5 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 170, "freeHanger": 1, "priceChange": "same"}, {"sl": 79, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Turmeric Powder ( Haldi )", "unit": "25 GM", "qty": 15.84, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 7.3, "rdsBag": 3480, "mrp": 10, "scheme": "", "perPcs": 7.3, "perKg": 292, "totalPc": 480, "displayProduct": "Turmeric Powder ( Haldi )", "aliases": "haldi, haldi powder, peeli haldi", "hindiName": "हल्दी पाउडर", "pdfSl": 79, "pdfQtyText": "480 PCS ( 15.84 KG ) BOX", "oldRdsLanding": 7.1, "oldRdsBag": 3408, "oldUnit": "30 GM", "oldPerPcs": 7.1, "oldPerKg": 236.6667, "exactPerPcs": 7.25, "priceChange": "up"}, {"sl": 80, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Red chilli Powder ( Lanka )", "unit": "25 GM", "qty": 10, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 7.2, "rdsBag": 2880, "mrp": 10, "scheme": "", "perPcs": 7.2, "perKg": 288, "totalPc": 400, "displayProduct": "Red chilli Powder ( Lanka / Lal Mirch )", "aliases": "lal mirch, laal mirch, mirchi, lanka, mirch powder", "hindiName": "लाल मिर्च पाउडर", "pdfSl": 80, "pdfQtyText": "400 PCS ( 10 KG ) BOX", "oldRdsLanding": 7.2, "oldRdsBag": 2880, "oldUnit": "25 GM", "oldPerPcs": 7.2, "oldPerKg": 288, "priceChange": "same"}, {"sl": 81, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Cumin Powder ( Jeera )", "unit": "15 GM", "qty": 7.5, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 6.8, "rdsBag": 3375, "mrp": 10, "scheme": "", "perPcs": 6.8, "perKg": 453.3333, "totalPc": 500, "displayProduct": "Cumin Powder ( Jeera )", "aliases": "jeera, zira, jeera powder", "hindiName": "जीरा पाउडर", "pdfSl": 81, "pdfQtyText": "500 PCS ( 7.5 KG ) BOX", "oldRdsLanding": 6.6, "oldRdsBag": 3300, "oldUnit": "15 GM", "oldPerPcs": 6.6, "oldPerKg": 440, "exactPerPcs": 6.75, "priceChange": "up"}, {"sl": 82, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Mix Masala Powder", "unit": "30 GM", "qty": 15.84, "qtyUnit": "KG", "packType": "BOX", "rdsLanding": 7.5, "rdsBag": 3600, "mrp": 10, "scheme": "", "perPcs": 7.5, "perKg": 250, "totalPc": 480, "displayProduct": "Mix Masala Powder ( Sabji / Mix Masala )", "aliases": "mix masala, sabzi masala, sabji masala", "hindiName": "मिक्स मसाला पाउडर", "pdfSl": 82, "pdfQtyText": "480 PCS ( 15.84 KG ) BOX", "oldRdsLanding": 7.2, "oldRdsBag": 3456, "oldUnit": "33 GM", "oldPerPcs": 7.2, "oldPerKg": 218.1818, "priceChange": "up"}, {"sl": 83, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Black Pepper Powder ( Golki )", "unit": "7 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "HANGER", "rdsLanding": 350, "rdsBag": 7000, "mrp": 10, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Black Pepper Powder ( Golki / Kali Mirch )", "aliases": "golki, kali mirch, kaali mirch, gol mirch", "hindiName": "काली मिर्च / गोलकी पाउडर", "pdfSl": 83, "pdfQtyText": "20 HANGER", "oldRdsLanding": 350, "oldRdsBag": 7000, "oldUnit": "7 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 350, "freeHanger": 0, "priceChange": "same"}, {"sl": 84, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Kasuri Methi Patta", "unit": "10 GM", "qty": 3, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 5.5, "rdsBag": 1650, "mrp": 10, "scheme": "", "perPcs": 5.5, "perKg": 550, "totalPc": 300, "displayProduct": "Kasuri Methi Patta", "aliases": "kasuri methi, methi patta, sukhi methi", "hindiName": "कसूरी मेथी पत्ता", "pdfSl": 84, "pdfQtyText": "300 PCS ( 3 KG ) BAG", "oldRdsLanding": 5.5, "oldRdsBag": 1650, "oldUnit": "10 GM", "oldPerPcs": 5.5, "oldPerKg": 550, "priceChange": "same"}, {"sl": 85, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Kashmiri Lal Mirch", "unit": "8 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "HANGER", "rdsLanding": 325, "rdsBag": 6500, "mrp": 10, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Kashmiri Lal Mirch ( Kashmiri Lal Mirch )", "aliases": "kashmiri lal mirch, kashmiri mirch, deggi mirch, rang wali mirch", "hindiName": "कश्मीरी लाल मिर्च", "pdfSl": 85, "pdfQtyText": "20 HANGER", "oldRdsLanding": 325, "oldRdsBag": 6500, "oldUnit": "8 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 325, "freeHanger": 0, "priceChange": "same"}, {"sl": 86, "sheet": "Namkeen & Hanger Items", "section": "RS. - 10/- ITEM", "product": "Sabji Masala", "unit": "6 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 115, "rdsBag": 2300, "mrp": 10, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Sabji Masala", "aliases": "sabji masala, sabzi masala", "hindiName": "सब्जी मसाला", "pdfSl": 86, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 115, "oldRdsBag": 2300, "oldUnit": "6 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 115, "freeHanger": 1, "priceChange": "same"}, {"sl": 87, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5/- BOX ITEM", "product": "Chicken Curry Masala", "unit": "7 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 70, "rdsBag": 1400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Chicken Curry Masala", "aliases": "chicken masala, murga masala, chicken curry", "hindiName": "चिकन करी मसाला", "pdfSl": 87, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 70, "oldRdsBag": 1400, "oldUnit": "7 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 70, "freeHanger": 1, "priceChange": "same"}, {"sl": 88, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5/- BOX ITEM", "product": "Meat Masala", "unit": "7 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 70, "rdsBag": 1400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Meat Masala", "aliases": "meat masala, mutton masala, gosht masala", "hindiName": "मीट मसाला", "pdfSl": 88, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 70, "oldRdsBag": 1400, "oldUnit": "7 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 70, "freeHanger": 1, "priceChange": "same"}, {"sl": 89, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5/- BOX ITEM", "product": "Garam Masala", "unit": "5 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 70, "rdsBag": 1400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Garam Masala", "aliases": "garam masala, khada masala powder", "hindiName": "गरम मसाला", "pdfSl": 89, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 70, "oldRdsBag": 1400, "oldUnit": "5 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 70, "freeHanger": 1, "priceChange": "same"}, {"sl": 90, "sheet": "Namkeen & Hanger Items", "section": "RS. - 5/- BOX ITEM", "product": "Curry Masala Powder", "unit": "7 GM", "qty": 20, "qtyUnit": "HANGER", "packType": "(+1 HANGER FREE)", "rdsLanding": 70, "rdsBag": 1400, "mrp": 5, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 20, "displayProduct": "Curry Masala Powder", "aliases": "curry masala, tari masala", "hindiName": "करी मसाला पाउडर", "pdfSl": 90, "pdfQtyText": "20 HANGER + 1 HANGER FREE", "oldRdsLanding": 70, "oldRdsBag": 1400, "oldUnit": "7 GM", "oldPerPcs": null, "oldPerKg": null, "perHanger": 70, "freeHanger": 1, "priceChange": "same"}, {"sl": 91, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Macaroni", "unit": "85 GM", "qty": 21.25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 6, "rdsBag": 1500, "mrp": 10, "scheme": "30+1", "perPcs": 6, "perKg": 70.5882, "totalPc": 250, "displayProduct": "Pasta Macaroni ( Macroni Pasta )", "aliases": "pasta, macaroni, macroni", "hindiName": "मैकरोनी पास्ता", "pdfSl": 91, "pdfQtyText": "250 PCS ( 21.25 KG ) BAG", "oldRdsLanding": 6, "oldRdsBag": 1500, "oldUnit": "85 GM", "oldPerPcs": 6, "oldPerKg": 70.5882, "priceChange": "same"}, {"sl": 92, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Fusilli", "unit": "85 GM", "qty": 21.25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 6, "rdsBag": 1500, "mrp": 10, "scheme": "30+1", "perPcs": 6, "perKg": 70.5882, "totalPc": 250, "displayProduct": "Pasta Fusilli ( Spiral Pasta )", "aliases": "pasta, fusilli, fueselli, spiral pasta", "hindiName": "फ्यूसिली (स्पाइरल) पास्ता", "pdfSl": 92, "pdfQtyText": "250 PCS ( 21.25 KG ) BAG", "oldRdsLanding": 6, "oldRdsBag": 1500, "oldUnit": "85 GM", "oldPerPcs": 6, "oldPerKg": 70.5882, "priceChange": "same"}, {"sl": 93, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Penne", "unit": "85 GM", "qty": 21.25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 6, "rdsBag": 1500, "mrp": 10, "scheme": "30+1", "perPcs": 6, "perKg": 70.5882, "totalPc": 250, "displayProduct": "Pasta Penne ( Penne Pasta )", "aliases": "pasta, penne, panne", "hindiName": "पेने पास्ता", "pdfSl": 93, "pdfQtyText": "250 PCS ( 21.25 KG ) BAG", "oldRdsLanding": 6, "oldRdsBag": 1500, "oldUnit": "85 GM", "oldPerPcs": 6, "oldPerKg": 70.5882, "priceChange": "same"}, {"sl": 94, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Macaroni", "unit": "1 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 50, "rdsBag": 1250, "mrp": 100, "scheme": "30+1", "perPcs": 50, "perKg": 50, "totalPc": 25, "displayProduct": "Pasta Macaroni ( Macroni Pasta )", "aliases": "pasta, macaroni, macroni", "hindiName": "मैकरोनी पास्ता", "pdfSl": 94, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 52, "oldRdsBag": 1300, "oldUnit": "1 KG", "oldPerPcs": 52, "oldPerKg": 52, "priceChange": "down"}, {"sl": 95, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Fusilli", "unit": "1 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 50, "rdsBag": 1250, "mrp": 100, "scheme": "30+1", "perPcs": 50, "perKg": 50, "totalPc": 25, "displayProduct": "Pasta Fusilli ( Spiral Pasta )", "aliases": "pasta, fusilli, fueselli, spiral pasta", "hindiName": "फ्यूसिली (स्पाइरल) पास्ता", "pdfSl": 95, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 52, "oldRdsBag": 1300, "oldUnit": "1 KG", "oldPerPcs": 52, "oldPerKg": 52, "priceChange": "down"}, {"sl": 96, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Penne", "unit": "1 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 50, "rdsBag": 1250, "mrp": 100, "scheme": "30+1", "perPcs": 50, "perKg": 50, "totalPc": 25, "displayProduct": "Pasta Penne ( Penne Pasta )", "aliases": "pasta, penne, panne", "hindiName": "पेने पास्ता", "pdfSl": 96, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 52, "oldRdsBag": 1300, "oldUnit": "1 KG", "oldPerPcs": 52, "oldPerKg": 52, "priceChange": "down"}, {"sl": 97, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Macaroni", "unit": "5 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 48, "rdsBag": 1200, "mrp": 480, "scheme": "30+1", "perPcs": 240, "perKg": 48, "totalPc": 5, "displayProduct": "Pasta Macaroni ( Macroni Pasta )", "aliases": "pasta, macaroni, macroni", "hindiName": "मैकरोनी पास्ता", "pdfSl": 97, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 50, "oldRdsBag": 1250, "oldUnit": "5 KG", "oldPerPcs": 250, "oldPerKg": 50, "priceChange": "down"}, {"sl": 98, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Fusilli", "unit": "5 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 48, "rdsBag": 1200, "mrp": 480, "scheme": "30+1", "perPcs": 240, "perKg": 48, "totalPc": 5, "displayProduct": "Pasta Fusilli ( Spiral Pasta )", "aliases": "pasta, fusilli, fueselli, spiral pasta", "hindiName": "फ्यूसिली (स्पाइरल) पास्ता", "pdfSl": 98, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 50, "oldRdsBag": 1250, "oldUnit": "5 KG", "oldPerPcs": 250, "oldPerKg": 50, "priceChange": "down"}, {"sl": 99, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "Pasta Penne", "unit": "5 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 48, "rdsBag": 1200, "mrp": 480, "scheme": "30+1", "perPcs": 240, "perKg": 48, "totalPc": 5, "displayProduct": "Pasta Penne ( Penne Pasta )", "aliases": "pasta, penne, panne", "hindiName": "पेने पास्ता", "pdfSl": 99, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 50, "oldRdsBag": 1250, "oldUnit": "5 KG", "oldPerPcs": 250, "oldPerKg": 50, "priceChange": "down"}, {"sl": 100, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "3D Papad Bat", "unit": "1 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 57, "rdsBag": 1425, "mrp": 100, "scheme": "25+1", "perPcs": 57, "perKg": 57, "totalPc": 25, "displayProduct": "3D Papad Bat ( Fryums Papad )", "aliases": "papad, 3d papad, fryums, kachri, bat papad", "hindiName": "3D पापड़ (बैट)", "pdfSl": 100, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 59, "oldRdsBag": 1475, "oldUnit": "1 KG", "oldPerPcs": 59, "oldPerKg": 59, "priceChange": "down"}, {"sl": 101, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "3D Papad Ball", "unit": "1 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 57, "rdsBag": 1425, "mrp": 100, "scheme": "25+1", "perPcs": 57, "perKg": 57, "totalPc": 25, "displayProduct": "3D Papad Ball ( Fryums Papad )", "aliases": "papad, 3d papad, fryums, kachri, ball papad", "hindiName": "3D पापड़ (बॉल)", "pdfSl": 101, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 59, "oldRdsBag": 1475, "oldUnit": "1 KG", "oldPerPcs": 59, "oldPerKg": 59, "priceChange": "down"}, {"sl": 102, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "3D Papad Heart", "unit": "1 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 57, "rdsBag": 1425, "mrp": 100, "scheme": "25+1", "perPcs": 57, "perKg": 57, "totalPc": 25, "displayProduct": "3D Papad Heart ( Fryums Papad )", "aliases": "papad, 3d papad, fryums, kachri, heart papad", "hindiName": "3D पापड़ (हार्ट)", "pdfSl": 102, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 59, "oldRdsBag": 1475, "oldUnit": "1 KG", "oldPerPcs": 59, "oldPerKg": 59, "priceChange": "down"}, {"sl": 103, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "3D Papad Bat", "unit": "5 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 55, "rdsBag": 1375, "mrp": 485, "scheme": "25+1", "perPcs": 275, "perKg": 55, "totalPc": 5, "displayProduct": "3D Papad Bat ( Fryums Papad )", "aliases": "papad, 3d papad, fryums, kachri, bat papad", "hindiName": "3D पापड़ (बैट)", "pdfSl": 103, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 57, "oldRdsBag": 1425, "oldUnit": "5 KG", "oldPerPcs": 285, "oldPerKg": 57, "priceChange": "down"}, {"sl": 104, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "3D Papad Ball", "unit": "5 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 55, "rdsBag": 1375, "mrp": 485, "scheme": "25+1", "perPcs": 275, "perKg": 55, "totalPc": 5, "displayProduct": "3D Papad Ball ( Fryums Papad )", "aliases": "papad, 3d papad, fryums, kachri, ball papad", "hindiName": "3D पापड़ (बॉल)", "pdfSl": 104, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 57, "oldRdsBag": 1425, "oldUnit": "5 KG", "oldPerPcs": 285, "oldPerKg": 57, "priceChange": "down"}, {"sl": 105, "sheet": "Pasta", "section": "PASTA & 3D PAPAD", "product": "3D Papad Heart", "unit": "5 KG", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 55, "rdsBag": 1375, "mrp": 485, "scheme": "25+1", "perPcs": 275, "perKg": 55, "totalPc": 5, "displayProduct": "3D Papad Heart ( Fryums Papad )", "aliases": "papad, 3d papad, fryums, kachri, heart papad", "hindiName": "3D पापड़ (हार्ट)", "pdfSl": 105, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 57, "oldRdsBag": 1425, "oldUnit": "5 KG", "oldPerPcs": 285, "oldPerKg": 57, "priceChange": "down"}, {"sl": 106, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Jeera", "unit": "15 GM", "qty": 15, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": "N / A", "rdsBag": "N / A", "mrp": 10, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 1000, "displayProduct": "Gota Jeera ( Sabut Jeera )", "aliases": "gota jeera, sabut jeera, khada jeera, jeera", "hindiName": "साबुत जीरा (गोटा जीरा)", "pdfSl": 1, "pdfQtyText": "1000 PCS BAG ( 15 KG )", "oldRdsLanding": "N / A", "oldRdsBag": "N / A", "oldUnit": "15 GM", "oldPerPcs": null, "oldPerKg": null, "priceChange": "same"}, {"sl": 107, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Jeera", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 358, "rdsBag": 7160, "mrp": 88, "scheme": "", "perPcs": 35.8, "perKg": 358, "totalPc": 200, "displayProduct": "Gota Jeera ( Sabut Jeera )", "aliases": "gota jeera, sabut jeera, khada jeera, jeera", "hindiName": "साबुत जीरा (गोटा जीरा)", "pdfSl": 2, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 328, "oldRdsBag": 6560, "oldUnit": "100 GM", "oldPerPcs": 32.8, "oldPerKg": 328, "priceChange": "up"}, {"sl": 108, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Jeera", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 360, "rdsBag": 7200, "mrp": 45, "scheme": "", "perPcs": 18, "perKg": 360, "totalPc": 400, "displayProduct": "Gota Jeera ( Sabut Jeera )", "aliases": "gota jeera, sabut jeera, khada jeera, jeera", "hindiName": "साबुत जीरा (गोटा जीरा)", "pdfSl": 3, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 330, "oldRdsBag": 6600, "oldUnit": "50 GM", "oldPerPcs": 16.5, "oldPerKg": 330, "priceChange": "up"}, {"sl": 109, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Ajwain", "unit": "15 GM", "qty": 15, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": "N / A", "rdsBag": "N / A", "mrp": 10, "scheme": "", "perPcs": null, "perKg": null, "totalPc": 1000, "displayProduct": "Ajwain ( Carom Seeds )", "aliases": "ajwain, ajwayan, carom seeds", "hindiName": "अजवाइन", "pdfSl": 4, "pdfQtyText": "1000 PCS BAG ( 15 KG )", "oldRdsLanding": "N / A", "oldRdsBag": "N / A", "oldUnit": "15 GM", "oldPerPcs": null, "oldPerKg": null, "priceChange": "same"}, {"sl": 110, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Ajwain", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 350, "rdsBag": 7000, "mrp": 210, "scheme": "", "perPcs": 175, "perKg": 350, "totalPc": 40, "displayProduct": "Ajwain ( Carom Seeds )", "aliases": "ajwain, ajwayan, carom seeds", "hindiName": "अजवाइन", "pdfSl": 5, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 350, "oldRdsBag": 7000, "oldUnit": "500 GM", "oldPerPcs": 175, "oldPerKg": 350, "priceChange": "same"}, {"sl": 111, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Ajwain", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 355, "rdsBag": 7100, "mrp": 58, "scheme": "", "perPcs": 35.5, "perKg": 355, "totalPc": 200, "displayProduct": "Ajwain ( Carom Seeds )", "aliases": "ajwain, ajwayan, carom seeds", "hindiName": "अजवाइन", "pdfSl": 6, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 355, "oldRdsBag": 7100, "oldUnit": "100 GM", "oldPerPcs": 35.5, "oldPerKg": 355, "priceChange": "same"}, {"sl": 112, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Ajwain", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 360, "rdsBag": 7200, "mrp": 30, "scheme": "", "perPcs": 18, "perKg": 360, "totalPc": 400, "displayProduct": "Ajwain ( Carom Seeds )", "aliases": "ajwain, ajwayan, carom seeds", "hindiName": "अजवाइन", "pdfSl": 7, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 360, "oldRdsBag": 7200, "oldUnit": "50 GM", "oldPerPcs": 18, "oldPerKg": 360, "priceChange": "same"}, {"sl": 113, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Saunf", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 350, "rdsBag": 7000, "mrp": 40, "scheme": "", "perPcs": 17.5, "perKg": 350, "totalPc": 400, "displayProduct": "Saunf ( Saunf / Moti Saunf )", "aliases": "sounf, saunf, sauf, fennel", "hindiName": "सौंफ", "pdfSl": 8, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 350, "oldRdsBag": 7000, "oldUnit": "50 GM", "oldPerPcs": 17.5, "oldPerKg": 350, "priceChange": "same"}, {"sl": 114, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Methi", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 88, "rdsBag": 1760, "mrp": 19, "scheme": "", "perPcs": 8.8, "perKg": 88, "totalPc": 200, "displayProduct": "Gota Methi ( Methi Dana )", "aliases": "gota methi, methi dana, sabut methi, methi", "hindiName": "मेथी दाना (साबुत मेथी)", "pdfSl": 9, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 88, "oldRdsBag": 1760, "oldUnit": "100 GM", "oldPerPcs": 8.8, "oldPerKg": 88, "priceChange": "same"}, {"sl": 115, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Methi", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 90, "rdsBag": 1800, "mrp": 10, "scheme": "", "perPcs": 4.5, "perKg": 90, "totalPc": 400, "displayProduct": "Gota Methi ( Methi Dana )", "aliases": "gota methi, methi dana, sabut methi, methi", "hindiName": "मेथी दाना (साबुत मेथी)", "pdfSl": 10, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 90, "oldRdsBag": 1800, "oldUnit": "50 GM", "oldPerPcs": 4.5, "oldPerKg": 90, "priceChange": "same"}, {"sl": 116, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Black Pepper", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 950, "rdsBag": 19000, "mrp": 90, "scheme": "", "perPcs": 47.5, "perKg": 950, "totalPc": 400, "displayProduct": "Gota Black Pepper ( Sabut Golki / Kali Mirch )", "aliases": "gota golki, sabut golki, kali mirch, kaali mirch, black pepper", "hindiName": "साबुत काली मिर्च / गोलकी", "pdfSl": 11, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 950, "oldRdsBag": 19000, "oldUnit": "50 GM", "oldPerPcs": 47.5, "oldPerKg": 950, "priceChange": "same"}, {"sl": 117, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Black Mustard seed", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 115, "rdsBag": 2300, "mrp": 19, "scheme": "", "perPcs": 11.5, "perKg": 115, "totalPc": 200, "displayProduct": "Black Mustard seed ( Kala Sarson / Rai )", "aliases": "kala sarson, rai, raai, sarso, sarson, mustard", "hindiName": "काला सरसों / राई", "pdfSl": 12, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 115, "oldRdsBag": 2300, "oldUnit": "100 GM", "oldPerPcs": 11.5, "oldPerKg": 115, "priceChange": "same"}, {"sl": 118, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Black Mustard seed", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 117, "rdsBag": 2340, "mrp": 10, "scheme": "", "perPcs": 5.85, "perKg": 117, "totalPc": 400, "displayProduct": "Black Mustard seed ( Kala Sarson / Rai )", "aliases": "kala sarson, rai, raai, sarso, sarson, mustard", "hindiName": "काला सरसों / राई", "pdfSl": 13, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 117, "oldRdsBag": 2340, "oldUnit": "50 GM", "oldPerPcs": 5.85, "oldPerKg": 117, "priceChange": "same"}, {"sl": 119, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Yellow Mustard seed", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 123, "rdsBag": 2460, "mrp": 19, "scheme": "", "perPcs": 12.3, "perKg": 123, "totalPc": 200, "displayProduct": "Yellow Mustard seed ( Pila Sarson )", "aliases": "pila sarson, peela sarso, sarson, sarso, mustard", "hindiName": "पीला सरसों", "pdfSl": 14, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 123, "oldRdsBag": 2460, "oldUnit": "100 GM", "oldPerPcs": 12.3, "oldPerKg": 123, "priceChange": "same"}, {"sl": 120, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Yellow Mustard seed", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 130, "rdsBag": 2600, "mrp": 10, "scheme": "", "perPcs": 6.5, "perKg": 130, "totalPc": 400, "displayProduct": "Yellow Mustard seed ( Pila Sarson )", "aliases": "pila sarson, peela sarso, sarson, sarso, mustard", "hindiName": "पीला सरसों", "pdfSl": 15, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 130, "oldRdsBag": 2600, "oldUnit": "50 GM", "oldPerPcs": 6.5, "oldPerKg": 130, "priceChange": "same"}, {"sl": 121, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Panch Phoran (A)", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 273, "rdsBag": 5460, "mrp": 58, "scheme": "", "perPcs": 27.3, "perKg": 273, "totalPc": 200, "displayProduct": "Panch Phoran (A) ( Panchforan )", "aliases": "panch phoran, panchforan, panch phoron", "hindiName": "पंचफोरन (A)", "pdfSl": 16, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 268, "oldRdsBag": 5360, "oldUnit": "100 GM", "oldPerPcs": 26.8, "oldPerKg": 268, "priceChange": "up"}, {"sl": 122, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Panch Phoran (A)", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 275, "rdsBag": 5500, "mrp": 30, "scheme": "", "perPcs": 13.75, "perKg": 275, "totalPc": 400, "displayProduct": "Panch Phoran (A) ( Panchforan )", "aliases": "panch phoran, panchforan, panch phoron", "hindiName": "पंचफोरन (A)", "pdfSl": 17, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 270, "oldRdsBag": 5400, "oldUnit": "50 GM", "oldPerPcs": 13.5, "oldPerKg": 270, "priceChange": "up"}, {"sl": 123, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Panch Phoran (B)", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 133, "rdsBag": 2660, "mrp": 58, "scheme": "", "perPcs": 13.3, "perKg": 133, "totalPc": 200, "displayProduct": "Panch Phoran (B) ( Panchforan )", "aliases": "panch phoran, panchforan, panch phoron", "hindiName": "पंचफोरन (B)", "pdfSl": 18, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 128, "oldRdsBag": 2560, "oldUnit": "100 GM", "oldPerPcs": 12.8, "oldPerKg": 128, "priceChange": "up"}, {"sl": 124, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Panch Phoran (B)", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 135, "rdsBag": 2700, "mrp": 30, "scheme": "", "perPcs": 6.75, "perKg": 135, "totalPc": 400, "displayProduct": "Panch Phoran (B) ( Panchforan )", "aliases": "panch phoran, panchforan, panch phoron", "hindiName": "पंचफोरन (B)", "pdfSl": 19, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 130, "oldRdsBag": 2600, "oldUnit": "50 GM", "oldPerPcs": 6.5, "oldPerKg": 130, "priceChange": "up"}, {"sl": 125, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Kalonji Seed", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 283, "rdsBag": 5660, "mrp": 68, "scheme": "", "perPcs": 28.3, "perKg": 283, "totalPc": 200, "displayProduct": "Kalonji Seed ( Kalonji / Mangrail )", "aliases": "kalonji, mangrail, kalaunji, kala jeera", "hindiName": "कलौंजी / मंगरैल", "pdfSl": 20, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 283, "oldRdsBag": 5660, "oldUnit": "100 GM", "oldPerPcs": 28.3, "oldPerKg": 283, "priceChange": "same"}, {"sl": 126, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Kalonji Seed", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 285, "rdsBag": 5700, "mrp": 35, "scheme": "", "perPcs": 14.25, "perKg": 285, "totalPc": 400, "displayProduct": "Kalonji Seed ( Kalonji / Mangrail )", "aliases": "kalonji, mangrail, kalaunji, kala jeera", "hindiName": "कलौंजी / मंगरैल", "pdfSl": 21, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 285, "oldRdsBag": 5700, "oldUnit": "50 GM", "oldPerPcs": 14.25, "oldPerKg": 285, "priceChange": "same"}, {"sl": 127, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Sabudana Small", "unit": "250 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 105, "rdsBag": 2100, "mrp": 45, "scheme": "", "perPcs": 26.25, "perKg": 105, "totalPc": 80, "displayProduct": "Sabudana Small ( Chhota Sabudana )", "aliases": "sabudana, sabu dana, chhota sabudana, sago", "hindiName": "छोटा साबूदाना", "pdfSl": 22, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 105, "oldRdsBag": 2100, "oldUnit": "250 GM", "oldPerPcs": 26.25, "oldPerKg": 105, "priceChange": "same"}, {"sl": 128, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Sabudana Big", "unit": "250 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 105, "rdsBag": 2100, "mrp": 45, "scheme": "", "perPcs": 26.25, "perKg": 105, "totalPc": 80, "displayProduct": "Sabudana Big ( Bada Sabudana )", "aliases": "sabudana, sabu dana, bada sabudana, sago", "hindiName": "बड़ा साबूदाना", "pdfSl": 23, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 105, "oldRdsBag": 2100, "oldUnit": "250 GM", "oldPerPcs": 26.25, "oldPerKg": 105, "priceChange": "same"}, {"sl": 129, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Gota Dhania", "unit": "1 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 210, "rdsBag": 6300, "mrp": 220, "scheme": "", "perPcs": 210, "perKg": 210, "totalPc": 30, "displayProduct": "Gota Dhania ( Sabut Dhaniya )", "aliases": "gota dhania, sabut dhaniya, dhaniya, dhania", "hindiName": "साबुत धनिया", "pdfSl": 24, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 210, "oldRdsBag": 6300, "oldUnit": "1 KG", "oldPerPcs": 210, "oldPerKg": 210, "priceChange": "same"}, {"sl": 130, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Tarka Dal", "unit": "200 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 122, "rdsBag": 3050, "mrp": 40, "scheme": "", "perPcs": 24.4, "perKg": 122, "totalPc": 125, "displayProduct": "Tarka Dal ( Tadka Dal )", "aliases": "tarka dal, tadka dal, chana dal", "hindiName": "तड़का दाल", "pdfSl": 25, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 122, "oldRdsBag": 3050, "oldUnit": "200 GM", "oldPerPcs": 24.4, "oldPerKg": 122, "priceChange": "same"}, {"sl": 131, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Vermicelli", "unit": "85 GM", "qty": 20.4, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1320, "rdsBag": 1320, "mrp": 13, "scheme": "30+1", "perPcs": 5.5, "perKg": 64.7059, "totalPc": 240, "displayProduct": "Vermicelli ( Sewai / Seviyan )", "aliases": "vermicelli, sewai, seviyan, sewaiya", "hindiName": "सेवई", "pdfSl": 26, "pdfQtyText": "20.4 KG BAG", "oldRdsLanding": 1360, "oldRdsBag": 1360, "oldUnit": "85 GM", "oldPerPcs": 5.6667, "oldPerKg": 66.6667, "priceChange": "down"}, {"sl": 132, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Vermicelli", "unit": "100 GM", "qty": 24, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1520, "rdsBag": 1520, "mrp": 15, "scheme": "", "perPcs": 6.3333, "perKg": 63.3333, "totalPc": 240, "displayProduct": "Vermicelli ( Sewai / Seviyan )", "aliases": "vermicelli, sewai, seviyan, sewaiya", "hindiName": "सेवई", "pdfSl": 27, "pdfQtyText": "24 KG BAG", "oldRdsLanding": 1560, "oldRdsBag": 1560, "oldUnit": "100 GM", "oldPerPcs": 6.5, "oldPerKg": 65, "priceChange": "down"}, {"sl": 133, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Vermicelli", "unit": "400 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1260, "rdsBag": 1260, "mrp": 58, "scheme": "30+1", "perPcs": 25.2, "perKg": 63, "totalPc": 50, "displayProduct": "Vermicelli ( Sewai / Seviyan )", "aliases": "vermicelli, sewai, seviyan, sewaiya", "hindiName": "सेवई", "pdfSl": 28, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1300, "oldRdsBag": 1300, "oldUnit": "400 GM", "oldPerPcs": 26, "oldPerKg": 65, "priceChange": "down"}, {"sl": 134, "sheet": "Whole Spices", "section": "WHOLE SPICES", "product": "Vermicelli", "unit": "5 KG", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1120, "rdsBag": 1120, "mrp": 700, "scheme": "30+1", "perPcs": 280, "perKg": 56, "totalPc": 4, "displayProduct": "Vermicelli ( Sewai / Seviyan )", "aliases": "vermicelli, sewai, seviyan, sewaiya", "hindiName": "सेवई", "pdfSl": 29, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1160, "oldRdsBag": 1160, "oldUnit": "5 KG", "oldPerPcs": 290, "oldPerKg": 58, "priceChange": "down"}, {"sl": 135, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poppy Seed", "unit": "8 GM", "qty": 8, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 14, "rdsBag": 14000, "mrp": 20, "scheme": "", "perPcs": 14, "perKg": 1750, "totalPc": 1000, "displayProduct": "Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "पोस्ता / खसखस", "pdfSl": 28, "pdfQtyText": "1000 PCS BAG / 8 KG BAG", "oldRdsLanding": 14, "oldRdsBag": 14000, "oldUnit": "8 GM", "oldPerPcs": 14, "oldPerKg": 1750, "priceChange": "same"}, {"sl": 136, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poppy Seed", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1566, "rdsBag": 31320, "mrp": 1350, "scheme": "", "perPcs": 783, "perKg": 1566, "totalPc": 40, "displayProduct": "Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "पोस्ता / खसखस", "pdfSl": 29, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1566, "oldRdsBag": 31320, "oldUnit": "500 GM", "oldPerPcs": 783, "oldPerKg": 1566, "priceChange": "same"}, {"sl": 137, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poppy Seed", "unit": "250 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1567, "rdsBag": 31340, "mrp": 675, "scheme": "", "perPcs": 391.75, "perKg": 1567, "totalPc": 80, "displayProduct": "Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "पोस्ता / खसखस", "pdfSl": 30, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1567, "oldRdsBag": 31340, "oldUnit": "250 GM", "oldPerPcs": 391.75, "oldPerKg": 1567, "priceChange": "same"}, {"sl": 138, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poppy Seed", "unit": "100 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1568, "rdsBag": 31360, "mrp": 275, "scheme": "", "perPcs": 156.8, "perKg": 1568, "totalPc": 200, "displayProduct": "Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "पोस्ता / खसखस", "pdfSl": 31, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1568, "oldRdsBag": 31360, "oldUnit": "100 GM", "oldPerPcs": 156.8, "oldPerKg": 1568, "priceChange": "same"}, {"sl": 139, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poppy Seed", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1570, "rdsBag": 31400, "mrp": 140, "scheme": "", "perPcs": 78.5, "perKg": 1570, "totalPc": 400, "displayProduct": "Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "पोस्ता / खसखस", "pdfSl": 32, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1570, "oldRdsBag": 31400, "oldUnit": "50 GM", "oldPerPcs": 78.5, "oldPerKg": 1570, "priceChange": "same"}, {"sl": 140, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poppy Seed", "unit": "25 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1575, "rdsBag": 31500, "mrp": 70, "scheme": "", "perPcs": 39.375, "perKg": 1575, "totalPc": 800, "displayProduct": "Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "पोस्ता / खसखस", "pdfSl": 33, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1575, "oldRdsBag": 31500, "oldUnit": "25 GM", "oldPerPcs": 39.375, "oldPerKg": 1575, "priceChange": "same"}, {"sl": 141, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "MP Gold Poppy Seed", "unit": "50 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 1520, "rdsBag": 30400, "mrp": 140, "scheme": "", "perPcs": 76, "perKg": 1520, "totalPc": 400, "displayProduct": "MP Gold Poppy Seed ( Posto / Khas Khas )", "aliases": "posto, posta, khaskhas, khuskhus, khas khas, poppy seed", "hindiName": "एमपी गोल्ड पोस्ता / खसखस", "pdfSl": 34, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 1520, "oldRdsBag": 30400, "oldUnit": "50 GM", "oldPerPcs": 76, "oldPerKg": 1520, "priceChange": "same"}, {"sl": 142, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari Bold", "unit": "5 KG", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 103, "rdsBag": 2060, "mrp": 750, "scheme": "", "perPcs": 515, "perKg": 103, "totalPc": 4, "displayProduct": "Soyabari Bold ( Badi Soya Badi / Nutrela )", "aliases": "soyabari, soya badi, soyabean badi, nutrela, soya chunks", "hindiName": "बड़ी सोया बड़ी / न्यूट्रेला", "pdfSl": 35, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 103, "oldRdsBag": 2060, "oldUnit": "5 KG", "oldPerPcs": 515, "oldPerKg": 103, "priceChange": "same"}, {"sl": 143, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari Mini", "unit": "5 KG", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 103, "rdsBag": 2060, "mrp": 750, "scheme": "", "perPcs": 515, "perKg": 103, "totalPc": 4, "displayProduct": "Soyabari Mini ( Chhoti Soya Badi )", "aliases": "soyabari, soya badi, mini soya, nutrela, soya chunks", "hindiName": "छोटी सोया बड़ी / न्यूट्रेला", "pdfSl": 36, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 103, "oldRdsBag": 2060, "oldUnit": "5 KG", "oldPerPcs": 515, "oldPerKg": 103, "priceChange": "same"}, {"sl": 144, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari Bold", "unit": "1 KG", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 105, "rdsBag": 2100, "mrp": 160, "scheme": "", "perPcs": 105, "perKg": 105, "totalPc": 20, "displayProduct": "Soyabari Bold ( Badi Soya Badi / Nutrela )", "aliases": "soyabari, soya badi, soyabean badi, nutrela, soya chunks", "hindiName": "बड़ी सोया बड़ी / न्यूट्रेला", "pdfSl": 37, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 105, "oldRdsBag": 2100, "oldUnit": "1 KG", "oldPerPcs": 105, "oldPerKg": 105, "priceChange": "same"}, {"sl": 145, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari Mini", "unit": "1 KG", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 105, "rdsBag": 2100, "mrp": 160, "scheme": "", "perPcs": 105, "perKg": 105, "totalPc": 20, "displayProduct": "Soyabari Mini ( Chhoti Soya Badi )", "aliases": "soyabari, soya badi, mini soya, nutrela, soya chunks", "hindiName": "छोटी सोया बड़ी / न्यूट्रेला", "pdfSl": 38, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 105, "oldRdsBag": 2100, "oldUnit": "1 KG", "oldPerPcs": 105, "oldPerKg": 105, "priceChange": "same"}, {"sl": 146, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari", "unit": "90 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 108, "rdsBag": 2160, "mrp": 20, "scheme": "", "perPcs": 9.7297, "perKg": 108.1081, "totalPc": 222, "displayProduct": "Soyabari ( Soya Badi / Nutrela )", "aliases": "soyabari, soya badi, soyabean badi, nutrela", "hindiName": "सोया बड़ी / न्यूट्रेला", "pdfSl": 39, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 108, "oldRdsBag": 2160, "oldUnit": "90 GM", "oldPerPcs": 9.7297, "oldPerKg": 108.1081, "priceChange": "same"}, {"sl": 147, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari Mini", "unit": "45 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 120, "rdsBag": 2400, "mrp": 10, "scheme": "", "perPcs": 5.4054, "perKg": 120.1201, "totalPc": 444, "displayProduct": "Soyabari Mini ( Chhoti Soya Badi )", "aliases": "soyabari, soya badi, mini soya, nutrela, soya chunks", "hindiName": "छोटी सोया बड़ी / न्यूट्रेला", "pdfSl": 40, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 120, "oldRdsBag": 2400, "oldUnit": "45 GM", "oldPerPcs": 5.4054, "oldPerKg": 120.1201, "priceChange": "same"}, {"sl": 148, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Soyabari Bold", "unit": "45 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 120, "rdsBag": 2400, "mrp": 10, "scheme": "", "perPcs": 5.4054, "perKg": 120.1201, "totalPc": 444, "displayProduct": "Soyabari Bold ( Badi Soya Badi / Nutrela )", "aliases": "soyabari, soya badi, soyabean badi, nutrela, soya chunks", "hindiName": "बड़ी सोया बड़ी / न्यूट्रेला", "pdfSl": 41, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 120, "oldRdsBag": 2400, "oldUnit": "45 GM", "oldPerPcs": 5.4054, "oldPerKg": 120.1201, "priceChange": "same"}, {"sl": 149, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Atta", "unit": "30 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 37, "rdsBag": 1110, "mrp": null, "scheme": "", "perPcs": 1110, "perKg": 37, "totalPc": 1, "displayProduct": "Atta ( Aata / Gehu Atta )", "aliases": "atta, aata, gehu atta, gehun aata", "hindiName": "गेहूं का आटा", "pdfSl": 42, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 37, "oldRdsBag": 1110, "oldUnit": "30 KG", "oldPerPcs": 1110, "oldPerKg": 37, "priceChange": "same"}, {"sl": 150, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Atta", "unit": "5 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 40, "rdsBag": 1200, "mrp": 275, "scheme": "", "perPcs": 200, "perKg": 40, "totalPc": 6, "displayProduct": "Atta ( Aata / Gehu Atta )", "aliases": "atta, aata, gehu atta, gehun aata", "hindiName": "गेहूं का आटा", "pdfSl": 43, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 40, "oldRdsBag": 1200, "oldUnit": "5 KG", "oldPerPcs": 200, "oldPerKg": 40, "priceChange": "same"}, {"sl": 151, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Atta", "unit": "1 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 41, "rdsBag": 1230, "mrp": 55, "scheme": "", "perPcs": 41, "perKg": 41, "totalPc": 30, "displayProduct": "Atta ( Aata / Gehu Atta )", "aliases": "atta, aata, gehu atta, gehun aata", "hindiName": "गेहूं का आटा", "pdfSl": 44, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 41, "oldRdsBag": 1230, "oldUnit": "1 KG", "oldPerPcs": 41, "oldPerKg": 41, "priceChange": "same"}, {"sl": 152, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Atta", "unit": "500 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 42, "rdsBag": 1260, "mrp": null, "scheme": "", "perPcs": 21, "perKg": 42, "totalPc": 60, "displayProduct": "Atta ( Aata / Gehu Atta )", "aliases": "atta, aata, gehu atta, gehun aata", "hindiName": "गेहूं का आटा", "pdfSl": 45, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 42, "oldRdsBag": 1260, "oldUnit": "500 GM", "oldPerPcs": 21, "oldPerKg": 42, "priceChange": "same"}, {"sl": 153, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Chokar", "unit": "40 KG", "qty": 40, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 27, "rdsBag": 1080, "mrp": null, "scheme": "", "perPcs": 1080, "perKg": 27, "totalPc": 1, "displayProduct": "Chokar ( Bhusi / Gehu Chokar )", "aliases": "chokar, bhusi, chhilka, wheat bran", "hindiName": "चोकर / भूसी", "pdfSl": 46, "pdfQtyText": "40 KG BAG", "oldRdsLanding": 27, "oldRdsBag": 1080, "oldUnit": "40 KG", "oldPerPcs": 1080, "oldPerKg": 27, "priceChange": "same"}, {"sl": 154, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sooji", "unit": "500 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 48, "rdsBag": 1440, "mrp": 35, "scheme": "", "perPcs": 24, "perKg": 48, "totalPc": 60, "displayProduct": "Sooji ( Suji / Rava )", "aliases": "sooji, suji, rava, rawa", "hindiName": "सूजी / रवा", "pdfSl": 47, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 48, "oldRdsBag": 1440, "oldUnit": "500 GM", "oldPerPcs": 24, "oldPerKg": 48, "priceChange": "same"}, {"sl": 155, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sooji", "unit": "200 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 49, "rdsBag": 1470, "mrp": 16, "scheme": "", "perPcs": 9.8, "perKg": 49, "totalPc": 150, "displayProduct": "Sooji ( Suji / Rava )", "aliases": "sooji, suji, rava, rawa", "hindiName": "सूजी / रवा", "pdfSl": 48, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 49, "oldRdsBag": 1470, "oldUnit": "200 GM", "oldPerPcs": 9.8, "oldPerKg": 49, "priceChange": "same"}, {"sl": 156, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sooji ( Bag )", "unit": "200 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 50, "rdsBag": 1500, "mrp": 16, "scheme": "", "perPcs": 10, "perKg": 50, "totalPc": 150, "displayProduct": "Sooji ( Bag ) ( Suji / Rava )", "aliases": "sooji, suji, rava, rawa", "hindiName": "सूजी / रवा (बैग)", "pdfSl": 49, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 50, "oldRdsBag": 1500, "oldUnit": "200 GM", "oldPerPcs": 10, "oldPerKg": 50, "priceChange": "same"}, {"sl": 157, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sooji", "unit": "150 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 50, "rdsBag": 1500, "mrp": 10, "scheme": "", "perPcs": 7.5, "perKg": 50, "totalPc": 200, "displayProduct": "Sooji ( Suji / Rava )", "aliases": "sooji, suji, rava, rawa", "hindiName": "सूजी / रवा", "pdfSl": 50, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 50, "oldRdsBag": 1500, "oldUnit": "150 GM", "oldPerPcs": 7.5, "oldPerKg": 50, "priceChange": "same"}, {"sl": 158, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sooji ( Bag )", "unit": "150 GM", "qty": 27, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 51, "rdsBag": 1377, "mrp": 10, "scheme": "", "perPcs": 7.65, "perKg": 51, "totalPc": 180, "displayProduct": "Sooji ( Bag ) ( Suji / Rava )", "aliases": "sooji, suji, rava, rawa", "hindiName": "सूजी / रवा (बैग)", "pdfSl": 51, "pdfQtyText": "27 KG BAG", "oldRdsLanding": 51, "oldRdsBag": 1377, "oldUnit": "150 GM", "oldPerPcs": 7.65, "oldPerKg": 51, "priceChange": "same"}, {"sl": 159, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sooji", "unit": "100 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 52, "rdsBag": 1560, "mrp": 8, "scheme": "", "perPcs": 5.2, "perKg": 52, "totalPc": 300, "displayProduct": "Sooji ( Suji / Rava )", "aliases": "sooji, suji, rava, rawa", "hindiName": "सूजी / रवा", "pdfSl": 52, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 52, "oldRdsBag": 1560, "oldUnit": "100 GM", "oldPerPcs": 5.2, "oldPerKg": 52, "priceChange": "same"}, {"sl": 160, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Matar Besan", "unit": "30 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 61, "rdsBag": 1830, "mrp": null, "scheme": "", "perPcs": 1830, "perKg": 61, "totalPc": 1, "displayProduct": "Matar Besan ( Matar ka Besan )", "aliases": "matar besan, besan, chana besan", "hindiName": "मटर बेसन", "pdfSl": 53, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 59, "oldRdsBag": 1770, "oldUnit": "30 KG", "oldPerPcs": 1770, "oldPerKg": 59, "priceChange": "up"}, {"sl": 161, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Matar Besan", "unit": "1 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 65, "rdsBag": 1950, "mrp": 98, "scheme": "", "perPcs": 65, "perKg": 65, "totalPc": 30, "displayProduct": "Matar Besan ( Matar ka Besan )", "aliases": "matar besan, besan, chana besan", "hindiName": "मटर बेसन", "pdfSl": 54, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 62, "oldRdsBag": 1860, "oldUnit": "1 KG", "oldPerPcs": 62, "oldPerKg": 62, "priceChange": "up"}, {"sl": 162, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Matar Besan", "unit": "500 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 66, "rdsBag": 1980, "mrp": 50, "scheme": "", "perPcs": 33, "perKg": 66, "totalPc": 60, "displayProduct": "Matar Besan ( Matar ka Besan )", "aliases": "matar besan, besan, chana besan", "hindiName": "मटर बेसन", "pdfSl": 55, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 63, "oldRdsBag": 1890, "oldUnit": "500 GM", "oldPerPcs": 31.5, "oldPerKg": 63, "priceChange": "up"}, {"sl": 163, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Matar Besan", "unit": "200 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 67, "rdsBag": 1675, "mrp": 22, "scheme": "", "perPcs": 13.4, "perKg": 67, "totalPc": 125, "displayProduct": "Matar Besan ( Matar ka Besan )", "aliases": "matar besan, besan, chana besan", "hindiName": "मटर बेसन", "pdfSl": 56, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 64, "oldRdsBag": 1600, "oldUnit": "200 GM", "oldPerPcs": 12.8, "oldPerKg": 64, "priceChange": "up"}, {"sl": 164, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Chana Besan", "unit": "30 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 94, "rdsBag": 2820, "mrp": null, "scheme": "", "perPcs": 2820, "perKg": 94, "totalPc": 1, "displayProduct": "Chana Besan ( Chana ka Besan )", "aliases": "chana besan, besan, gram flour", "hindiName": "चना बेसन", "pdfSl": 57, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 92, "oldRdsBag": 2760, "oldUnit": "30 KG", "oldPerPcs": 2760, "oldPerKg": 92, "priceChange": "up"}, {"sl": 165, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Chana Besan", "unit": "1 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 98, "rdsBag": 2940, "mrp": 140, "scheme": "", "perPcs": 98, "perKg": 98, "totalPc": 30, "displayProduct": "Chana Besan ( Chana ka Besan )", "aliases": "chana besan, besan, gram flour", "hindiName": "चना बेसन", "pdfSl": 58, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 95, "oldRdsBag": 2850, "oldUnit": "1 KG", "oldPerPcs": 95, "oldPerKg": 95, "priceChange": "up"}, {"sl": 166, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Chana Besan", "unit": "500 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 99, "rdsBag": 2970, "mrp": 72, "scheme": "", "perPcs": 49.5, "perKg": 99, "totalPc": 60, "displayProduct": "Chana Besan ( Chana ka Besan )", "aliases": "chana besan, besan, gram flour", "hindiName": "चना बेसन", "pdfSl": 59, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 96, "oldRdsBag": 2880, "oldUnit": "500 GM", "oldPerPcs": 48, "oldPerKg": 96, "priceChange": "up"}, {"sl": 167, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Chana Besan", "unit": "200 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 100, "rdsBag": 2500, "mrp": 30, "scheme": "", "perPcs": 20, "perKg": 100, "totalPc": 125, "displayProduct": "Chana Besan ( Chana ka Besan )", "aliases": "chana besan, besan, gram flour", "hindiName": "चना बेसन", "pdfSl": 60, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 97, "oldRdsBag": 2425, "oldUnit": "200 GM", "oldPerPcs": 19.4, "oldPerKg": 97, "priceChange": "up"}, {"sl": 168, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Maida", "unit": "1 KG", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 43, "rdsBag": 1290, "mrp": 62, "scheme": "", "perPcs": 43, "perKg": 43, "totalPc": 30, "displayProduct": "Maida ( Fine Flour )", "aliases": "maida, maida aata", "hindiName": "मैदा", "pdfSl": 61, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 43, "oldRdsBag": 1290, "oldUnit": "1 KG", "oldPerPcs": 43, "oldPerKg": 43, "priceChange": "same"}, {"sl": 169, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Maida", "unit": "500 GM", "qty": 30, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 44, "rdsBag": 1320, "mrp": 32, "scheme": "", "perPcs": 22, "perKg": 44, "totalPc": 60, "displayProduct": "Maida ( Fine Flour )", "aliases": "maida, maida aata", "hindiName": "मैदा", "pdfSl": 62, "pdfQtyText": "30 KG BAG", "oldRdsLanding": 44, "oldRdsBag": 1320, "oldUnit": "500 GM", "oldPerPcs": 22, "oldPerKg": 44, "priceChange": "same"}, {"sl": 170, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Dalia", "unit": "500 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 56, "rdsBag": 1400, "mrp": 50, "scheme": "", "perPcs": 28, "perKg": 56, "totalPc": 50, "displayProduct": "Dalia ( Daliya / Broken Wheat )", "aliases": "dalia, daliya, broken wheat", "hindiName": "दलिया", "pdfSl": 63, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 56, "oldRdsBag": 1400, "oldUnit": "500 GM", "oldPerPcs": 28, "oldPerKg": 56, "priceChange": "same"}, {"sl": 171, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Dalia", "unit": "200 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 57, "rdsBag": 1425, "mrp": 20, "scheme": "", "perPcs": 11.4, "perKg": 57, "totalPc": 125, "displayProduct": "Dalia ( Daliya / Broken Wheat )", "aliases": "dalia, daliya, broken wheat", "hindiName": "दलिया", "pdfSl": 64, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 57, "oldRdsBag": 1425, "oldUnit": "200 GM", "oldPerPcs": 11.4, "oldPerKg": 57, "priceChange": "same"}, {"sl": 172, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Poha", "unit": "500 GM", "qty": 20, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 75, "rdsBag": 1500, "mrp": 60, "scheme": "", "perPcs": 37.5, "perKg": 75, "totalPc": 40, "displayProduct": "Poha ( Chura / Chiwda )", "aliases": "poha, chura, chiwda, chivda", "hindiName": "पोहा / चूड़ा", "pdfSl": 65, "pdfQtyText": "20 KG BAG", "oldRdsLanding": 75, "oldRdsBag": 1500, "oldUnit": "500 GM", "oldPerPcs": 37.5, "oldPerKg": 75, "priceChange": "same"}, {"sl": 173, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sattu", "unit": "200 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 122, "rdsBag": 3050, "mrp": 40, "scheme": "", "perPcs": 24.4, "perKg": 122, "totalPc": 125, "displayProduct": "Sattu ( Chana Sattu )", "aliases": "sattu, chana sattu, bhuna chana", "hindiName": "चना सत्तू", "pdfSl": 66, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 122, "oldRdsBag": 3050, "oldUnit": "200 GM", "oldPerPcs": 24.4, "oldPerKg": 122, "priceChange": "same"}, {"sl": 174, "sheet": "Agro Item", "section": "AGRO ITEM", "product": "Sattu", "unit": "500 GM", "qty": 25, "qtyUnit": "KG", "packType": "BAG", "rdsLanding": 120, "rdsBag": 3000, "mrp": null, "scheme": "", "perPcs": 60, "perKg": 120, "totalPc": 50, "displayProduct": "Sattu ( Chana Sattu )", "aliases": "sattu, chana sattu, bhuna chana", "hindiName": "चना सत्तू", "pdfSl": 67, "pdfQtyText": "25 KG BAG", "oldRdsLanding": 120, "oldRdsBag": 3000, "oldUnit": "500 GM", "oldPerPcs": 60, "oldPerKg": 120, "priceChange": "same"}];
+
+    // Percentage options requested by user: 0% (Base) + 2% to 15%
+    const PCT_OPTIONS = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+    const CATEGORIES = [
+      { id: 'ALL', label: 'All Items' },
+      { id: 'Powder Spices', label: 'Powder Spices' },
+      { id: 'BLENDED ITEM', label: 'Blended Item' },
+      { id: 'Namkeen & Hanger Items', label: 'Namkeen & Hanger' },
+      { id: 'Pasta', label: 'Pasta & 3D Papad' },
+      { id: 'Whole Spices', label: 'Whole Spices' },
+      { id: 'Agro Item', label: 'Agro Item' }
+    ];
+
+    const QUICK_TERMS = [
+      { label: 'Haldi / हल्दी', query: 'Haldi' },
+      { label: 'Mirch / मिर्च', query: 'Lanka' },
+      { label: 'Jeera / जीरा', query: 'Jeera' },
+      { label: 'Dhaniya / धनिया', query: 'Dhania' },
+      { label: 'Mix Masala', query: 'Mix Masala' },
+      { label: 'Golki / गोलकी', query: 'Golki' },
+      { label: 'BUY 1 GET 1', query: 'BUY 1 GET 1' },
+      { label: 'Hanger ₹5/₹10', query: 'HANGER' },
+      { label: '₹10 Items', query: 'RS. - 10/- ITEM' },
+      { label: 'Chanachur', query: 'Chanachur' },
+      { label: 'Pasta & Papad', query: 'PASTA & 3D PAPAD' },
+      { label: 'Sewai / Vermicelli', query: 'Vermicelli' },
+      { label: 'Posto / पोस्ता', query: 'Poppy' },
+      { label: 'Soyabari', query: 'Soyabari' },
+      { label: 'Atta / Sooji / Maida', query: 'AGRO ITEM' },
+      { label: 'Besan / बेसन', query: 'Besan' }
+    ];
+
+    let state = {
+      query: '',
+      category: 'ALL',
+      viewMode: 'cards',
+      onlyChanged: false,
+      globalPct: 0,
+      itemPct: {}, // key: sl -> number (0, 2..15)
+      cart: {}, // key: sl -> { qty: number, unitMode: 'BAG' | 'PCS' }
+      partyName: '',
+      partyLocation: '',
+      partyMobile: '',
+      showSlipBreakdown: true
+    };
+
+    try {
+      const savedState = localStorage.getItem('manpasand_state_v2_15_11_2026');
+      if (savedState) {
+        const parsed = JSON.parse(savedState);
+        if (parsed && typeof parsed === 'object') {
+          state.cart = parsed.cart || {};
+          state.itemPct = parsed.itemPct || {};
+          state.globalPct = Number(parsed.globalPct) || 0;
+          state.partyName = parsed.partyName || '';
+          state.partyLocation = parsed.partyLocation || '';
+          state.partyMobile = parsed.partyMobile || '';
+          if (typeof parsed.showSlipBreakdown === 'boolean') {
+            state.showSlipBreakdown = parsed.showSlipBreakdown;
+          }
+        }
+      }
+    } catch (e) {}
+
+    function saveState() {
+      try {
+        localStorage.setItem('manpasand_state_v2_15_11_2026', JSON.stringify({
+          cart: state.cart,
+          itemPct: state.itemPct,
+          globalPct: state.globalPct,
+          partyName: state.partyName,
+          partyLocation: state.partyLocation,
+          partyMobile: state.partyMobile,
+          showSlipBreakdown: state.showSlipBreakdown
+        }));
+      } catch (e) {}
+    }
+
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const quickChipsEl = document.getElementById('quickChips');
+    const categoryTabsEl = document.getElementById('categoryTabs');
+    const globalPctBarEl = document.getElementById('globalPctBar');
+    const resultSummaryEl = document.getElementById('resultSummary');
+    const changedFilterBtn = document.getElementById('changedFilterBtn');
+    const cardsContainerEl = document.getElementById('cardsContainer');
+    const tableContainerEl = document.getElementById('tableContainer');
+    const tableBodyEl = document.getElementById('tableBody');
+    const emptyStateEl = document.getElementById('emptyState');
+    const viewCardsBtn = document.getElementById('viewCardsBtn');
+    const viewTableBtn = document.getElementById('viewTableBtn');
+    const resetAllBtn = document.getElementById('resetAllBtn');
+
+    const orderBottomBar = document.getElementById('orderBottomBar');
+    const orderBarCount = document.getElementById('orderBarCount');
+    const orderBarTotal = document.getElementById('orderBarTotal');
+    const orderBarSub = document.getElementById('orderBarSub');
+    const clearOrderBarBtn = document.getElementById('clearOrderBarBtn');
+    const openOrderModalBtn = document.getElementById('openOrderModalBtn');
+    const orderModal = document.getElementById('orderModal');
+    const closeOrderModalBtn = document.getElementById('closeOrderModalBtn');
+    const partyNameInput = document.getElementById('partyNameInput');
+    const partyLocationInput = document.getElementById('partyLocationInput');
+    const partyMobileInput = document.getElementById('partyMobileInput');
+    const cartBulkPctBar = document.getElementById('cartBulkPctBar');
+    const orderModalList = document.getElementById('orderModalList');
+    const orderModalBaseSummary = document.getElementById('orderModalBaseSummary');
+    const orderModalGrandTotal = document.getElementById('orderModalGrandTotal');
+    const toggleSlipBreakdownBtn = document.getElementById('toggleSlipBreakdownBtn');
+    const copyOrderBtn = document.getElementById('copyOrderBtn');
+    const whatsappShareBtn = document.getElementById('whatsappShareBtn');
+    const toastNotice = document.getElementById('toastNotice');
+
+    // Initialize party inputs from saved state
+    partyNameInput.value = state.partyName;
+    partyLocationInput.value = state.partyLocation;
+    partyMobileInput.value = state.partyMobile;
+
+    function showToast(msg) {
+      toastNotice.textContent = msg;
+      toastNotice.classList.remove('hidden');
+      setTimeout(() => {
+        toastNotice.classList.add('hidden');
+      }, 2200);
+    }
+
+    function fmtRs(val) {
+      if (val === null || val === undefined || val === '' || val === 'N / A') {
+        return val === 'N / A' ? 'N / A' : '—';
+      }
+      const num = Number(val);
+      if (Number.isNaN(num)) return String(val);
+      return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtIntRs(val) {
+      if (val === null || val === undefined || val === '' || val === 'N / A') {
+        return val === 'N / A' ? 'N / A' : '—';
+      }
+      const num = Number(val);
+      if (Number.isNaN(num)) return String(val);
+      return '₹' + num.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+    }
+
+    function fmtQty(item) {
+      if (item.pdfQtyText) {
+        return item.pdfQtyText;
+      }
+      const parts = [];
+      if (item.qty !== null && item.qty !== undefined && item.qty !== '') {
+        parts.push(item.qty + (item.qtyUnit ? ' ' + item.qtyUnit : ''));
+      }
+      if (item.packType) {
+        parts.push(item.packType);
+      }
+      return parts.join(' ') || '—';
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function getItemPct(sl) {
+      if (state.itemPct[sl] !== undefined) {
+        return Number(state.itemPct[sl]) || 0;
+      }
+      return Number(state.globalPct) || 0;
+    }
+
+    // Returns the exact base single-piece (or per-hanger) rate for an item
+    function getBaseSingleRate(item) {
+      if (item.rdsBag === 'N / A' || item.rdsLanding === 'N / A') return null;
+      if (item.qtyUnit === 'HANGER') {
+        return Number(item.rdsLanding) || 0;
+      }
+      if (item.exactPerPcs !== undefined) {
+        return Number(item.exactPerPcs) || 0;
+      }
+      return item.perPcs !== null && item.perPcs !== undefined ? Number(item.perPcs) : null;
+    }
+
+    function getBaseBagRate(item) {
+      if (item.rdsBag === 'N / A' || item.rdsLanding === 'N / A') return null;
+      return Number(item.rdsBag) || 0;
+    }
+
+    function getBaseUnitOrderRate(item, mode) {
+      if (mode === 'BAG') {
+        return getBaseBagRate(item) || 0;
+      }
+      return getBaseSingleRate(item) || 0;
+    }
+
+    function getPartyUnitOrderRate(item, mode, pct) {
+      const base = getBaseUnitOrderRate(item, mode);
+      const p = pct !== undefined ? pct : getItemPct(item.sl);
+      return base * (1 + p / 100);
+    }
+
+    function getChangeBadgeHtml(item) {
+      if (!item.priceChange || item.priceChange === 'same') return '';
+      if (item.priceChange === 'new') {
+        return `<span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-extrabold">★ Now Available (New Rate)</span>`;
+      }
+      if (item.priceChange === 'na') {
+        return `<span class="px-2 py-0.5 rounded-md bg-red-100 text-red-800 border border-red-300 text-[11px] font-extrabold">Currently N/A (Was ₹${item.oldRdsLanding})</span>`;
+      }
+      const unitChanged = item.oldUnit && item.oldUnit !== item.unit
+        ? ` • Pack: ${escapeHtml(item.oldUnit)}→${escapeHtml(item.unit)}`
+        : '';
+      if (item.priceChange === 'up') {
+        return `<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-950 border border-amber-300 text-[11px] font-bold">▲ Rate Up (Was ₹${item.oldRdsLanding} / Bag ₹${item.oldRdsBag}${unitChanged})</span>`;
+      }
+      if (item.priceChange === 'down') {
+        return `<span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-bold">▼ Rate Down (Was ₹${item.oldRdsLanding} / Bag ₹${item.oldRdsBag}${unitChanged})</span>`;
+      }
+      return '';
+    }
+
+    function getFilteredItems() {
+      const tokens = state.query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      return PRICE_LIST.filter(item => {
+        if (state.category !== 'ALL' && item.sheet !== state.category) {
+          return false;
+        }
+        if (state.onlyChanged && (!item.priceChange || item.priceChange === 'same')) {
+          return false;
+        }
+        if (tokens.length === 0) return true;
+        const haystack = [
+          item.product,
+          item.displayProduct || '',
+          item.aliases || '',
+          item.unit,
+          item.section,
+          item.sheet,
+          item.packType,
+          item.pdfQtyText || '',
+          item.hindiName || '',
+          item.qty !== null ? String(item.qty) + ' ' + item.qtyUnit : ''
+        ].join(' ').toLowerCase();
+        return tokens.every(t => {
+          if (/^#\d+$/.test(t)) {
+            const num = Number(t.slice(1));
+            return item.sl === num || item.pdfSl === num;
+          }
+          return haystack.includes(t);
+        });
+      });
+    }
+
+    function renderQuickChips() {
+      const prefix = '<span class="text-[11px] text-green-100 font-semibold shrink-0 mr-0.5">Quick:</span>';
+      quickChipsEl.innerHTML = prefix + QUICK_TERMS.map(chip => {
+        const active = state.query.toLowerCase() === chip.query.toLowerCase();
+        return `<button type="button" data-quick="${escapeHtml(chip.query)}"
+          class="shrink-0 px-2.5 py-1 rounded-full text-xs font-bold transition ${active ? 'bg-amber-300 text-gray-950 shadow-xs' : 'bg-[#2f4d19] text-green-50 hover:bg-[#253d13]'}">
+          ${escapeHtml(chip.label)}
+        </button>`;
+      }).join('');
+    }
+
+    function renderCategoryTabs() {
+      categoryTabsEl.innerHTML = CATEGORIES.map(cat => {
+        const count = cat.id === 'ALL'
+          ? PRICE_LIST.length
+          : PRICE_LIST.filter(i => i.sheet === cat.id).length;
+        const active = state.category === cat.id;
+        return `<button type="button" data-cat="${escapeHtml(cat.id)}"
+          class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition ${active ? 'bg-[#3c5e22] text-white shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}">
+          ${escapeHtml(cat.label)} <span class="opacity-75">(${count})</span>
+        </button>`;
+      }).join('');
+
+      const totalChanged = PRICE_LIST.filter(i => i.priceChange && i.priceChange !== 'same').length;
+      changedFilterBtn.textContent = state.onlyChanged
+        ? `⚡ Showing Changed Only (${totalChanged})`
+        : `⚡ Rate Changes (${totalChanged})`;
+      changedFilterBtn.className = state.onlyChanged
+        ? 'px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition bg-amber-400 text-gray-950 border border-amber-500 shadow-xs'
+        : 'px-2.5 py-1 rounded-lg text-[11px] font-bold transition border border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100';
+
+      // Render global quick % bar
+      globalPctBarEl.innerHTML = `<span class="text-[11px] font-extrabold text-gray-700 shrink-0 mr-1">सभी आइटम पर % (All Items %):</span>` +
+        PCT_OPTIONS.map(p => {
+          const active = state.globalPct === p && Object.keys(state.itemPct).length === 0;
+          const label = p === 0 ? 'Base (0%)' : `+${p}%`;
+          return `<button type="button" data-global-pct="${p}"
+            class="shrink-0 px-2 py-0.5 rounded-md text-[11px] font-extrabold transition ${active ? 'bg-[#3c5e22] text-white shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}">
+            ${label}
+          </button>`;
+        }).join('');
+    }
+
+    function renderCards(items) {
+      cardsContainerEl.innerHTML = items.map(item => {
+        const qtyDisplay = fmtQty(item);
+        const isHanger = item.qtyUnit === 'HANGER';
+        const isNA = item.rdsLanding === 'N / A' || item.rdsBag === 'N / A';
+        const isBogo = (item.product || '').toUpperCase().includes('BUY 1 GET 1');
+        const activePct = getItemPct(item.sl);
+
+        const schemeBadge = item.scheme
+          ? `<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300 text-xs font-extrabold">Scheme: ${escapeHtml(item.scheme)}</span>`
+          : '';
+        const bogoBadge = isBogo
+          ? `<span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-900 border border-rose-300 text-xs font-extrabold">🎁 BUY 1 GET 1 FREE</span>`
+          : '';
+        const changeBadge = getChangeBadgeHtml(item);
+
+        // SL badge showing both global SL and PDF table SL if different
+        const slBadge = item.sl !== item.pdfSl
+          ? `#${item.sl} <span class="text-[10px] text-gray-400 font-semibold">(PDF #${item.pdfSl})</span>`
+          : `#${item.sl}`;
+
+        // Base Per Pcs / Hanger & Per KG display
+        const baseSingle = getBaseSingleRate(item);
+        const baseBag = getBaseBagRate(item);
+
+        let primaryRateLabel = isHanger ? 'Base Per Hanger' : (isBogo ? 'Base Per Pcs (BOGO)' : 'Base Per Pcs Rate');
+        let primaryRateVal = fmtRs(baseSingle);
+        if (item.exactPerPcs !== undefined) {
+          primaryRateVal = `${fmtRs(item.exactPerPcs)} <span class="block text-[10px] font-semibold text-gray-500">(PDF Print: ₹${Number(item.perPcs).toFixed(2)})</span>`;
+        }
+
+        let secondaryRateLabel = isHanger ? 'Effective (With Free)' : (isBogo ? 'Base Per KG (BOGO)' : 'Base Per KG Rate');
+        let secondaryRateVal = fmtRs(item.perKg);
+        if (isHanger) {
+          if (!isNA && item.freeHanger) {
+            const effHanger = Number(item.rdsBag) / (Number(item.totalPc) + item.freeHanger);
+            secondaryRateVal = `${fmtRs(effHanger)} <span class="block text-[10px] font-semibold text-gray-500">(20+1 = 21 Hangers)</span>`;
+          } else {
+            secondaryRateVal = isNA ? 'N / A' : `${fmtRs(item.rdsLanding)} / Hanger`;
+          }
+        }
+
+        // Calculate Party Rate with activePct (2% to 15%)
+        const partySingle = baseSingle !== null ? baseSingle * (1 + activePct / 100) : null;
+        const partyKg = item.perKg !== null && item.perKg !== undefined ? Number(item.perKg) * (1 + activePct / 100) : null;
+        const partyBag = baseBag !== null ? baseBag * (1 + activePct / 100) : null;
+
+        // Retailer Margin vs MRP (at current Party Rate)
+        let marginHtml = '';
+        if (!isHanger && !isNA && item.mrp && partySingle) {
+          const profit = item.mrp - partySingle;
+          const pct = (profit / item.mrp) * 100;
+          if (profit >= 0) {
+            marginHtml = `<span class="text-emerald-700 font-bold">दुकानदार मुनाफा: ₹${profit.toFixed(2)}/pc (${pct.toFixed(0)}%)</span>`;
+          } else {
+            marginHtml = `<span class="text-red-600 font-bold">Above MRP by ₹${Math.abs(profit).toFixed(2)}/pc</span>`;
+          }
+        }
+
+        // Soyabari verification note
+        const soyabariNote = (item.sl >= 142 && item.sl <= 148)
+          ? `<div class="mt-1.5 px-2 py-1 rounded bg-blue-50 text-blue-900 text-[11px] font-semibold">✓ Verified Rate: ₹${item.perKg}/KG • 20 KG Bag = ₹${item.rdsBag}</div>`
+          : '';
+
+        // Per-Item Percentage Selector (0%, 2% to 15%)
+        const unitLabel = isHanger ? 'Hanger' : 'Pcs';
+        const bagLabel = item.packType && item.packType.includes('BOX') ? 'Box' : 'Bag';
+
+        const pctSelectorHtml = isNA ? '' : `
+          <div class="mt-2.5 pt-2.5 border-t border-gray-100">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-extrabold text-gray-700">भाड़ा / मार्जिन जोड़ें (Add 2%–15%):</span>
+              <span class="text-[11px] font-extrabold ${activePct > 0 ? 'text-amber-800 bg-amber-100 px-2 py-0.5 rounded' : 'text-gray-500'}">
+                ${activePct > 0 ? `Selected: +${activePct}%` : 'Base Rate (0%)'}
+              </span>
+            </div>
+            <div class="grid grid-cols-5 sm:grid-cols-8 gap-1">
+              ${PCT_OPTIONS.map(p => {
+                const isSelected = activePct === p;
+                const btnText = p === 0 ? '0%' : `${p}%`;
+                return `<button type="button" data-item-pct-sl="${item.sl}" data-pct="${p}"
+                  class="py-1.5 rounded-lg text-xs font-extrabold transition border ${
+                    isSelected
+                      ? (p === 0 ? 'bg-gray-900 text-white border-gray-900 shadow-xs' : 'bg-amber-400 text-gray-950 border-amber-500 shadow-xs ring-1 ring-amber-500')
+                      : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 active:bg-gray-200'
+                  }">
+                  ${btnText}
+                </button>`;
+              }).join('')}
+            </div>
+
+            <!-- Live Party Rate Box -->
+            <div class="mt-2 rounded-xl p-2.5 border ${activePct > 0 ? 'bg-amber-50/90 border-amber-300' : 'bg-gray-50 border-gray-200'}">
+              <div class="flex items-center justify-between text-[11px] font-extrabold ${activePct > 0 ? 'text-amber-950' : 'text-gray-700'}">
+                <span>${activePct > 0 ? `🎯 पार्टी का रेट (Party Rate @ +${activePct}%)` : '📋 पार्टी का रेट (Base 0% — टैप कर % बढ़ाएं)'}</span>
+                ${activePct > 0 && baseSingle !== null ? `<span class="text-emerald-800">+₹${(partySingle - baseSingle).toFixed(2)}/${unitLabel} extra</span>` : ''}
+              </div>
+              <div class="mt-1.5 grid grid-cols-3 gap-1.5 text-center">
+                <div class="bg-white rounded-lg p-1.5 border border-gray-200/80">
+                  <div class="text-[10px] font-semibold text-gray-500">Party / ${unitLabel}</div>
+                  <div class="text-xs sm:text-sm font-extrabold text-[#2f4d19]">${fmtRs(partySingle)}</div>
+                </div>
+                <div class="bg-white rounded-lg p-1.5 border border-gray-200/80">
+                  <div class="text-[10px] font-semibold text-gray-500">Party / KG</div>
+                  <div class="text-xs sm:text-sm font-extrabold text-[#2f4d19]">${partyKg !== null ? fmtRs(partyKg) : '—'}</div>
+                </div>
+                <div class="bg-white rounded-lg p-1.5 border border-gray-200/80">
+                  <div class="text-[10px] font-semibold text-gray-500">Party ${bagLabel}</div>
+                  <div class="text-xs sm:text-sm font-extrabold text-gray-900">${fmtRs(partyBag)}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Order cart controls
+        const cartEntry = state.cart[item.sl] || { qty: 0, unitMode: 'PCS' };
+        const currentPartyUnitRate = getPartyUnitOrderRate(item, cartEntry.unitMode, activePct);
+        const currentTotal = cartEntry.qty > 0 ? cartEntry.qty * currentPartyUnitRate : 0;
+
+        const orderControlsHtml = isNA ? `
+          <div class="mt-3 pt-2.5 border-t border-gray-100 text-center text-xs font-bold text-red-600 bg-red-50 rounded-lg py-1.5">
+            Currently Not Available (N / A)
+          </div>
+        ` : `
+          <div class="mt-2.5 pt-2.5 border-t border-gray-100 flex items-center justify-between gap-2">
+            <div class="inline-flex rounded-lg bg-gray-100 p-0.5 text-[11px] font-bold">
+              <button type="button" data-mode-sl="${item.sl}" data-mode="PCS"
+                class="px-2.5 py-1 rounded-md transition ${cartEntry.unitMode === 'PCS' ? 'bg-[#3c5e22] text-white shadow-xs' : 'text-gray-700'}">
+                ${unitLabel}
+              </button>
+              <button type="button" data-mode-sl="${item.sl}" data-mode="BAG"
+                class="px-2.5 py-1 rounded-md transition ${cartEntry.unitMode === 'BAG' ? 'bg-[#3c5e22] text-white shadow-xs' : 'text-gray-700'}">
+                ${bagLabel}
+              </button>
+            </div>
+
+            <div class="flex items-center gap-1">
+              <button type="button" data-step-sl="${item.sl}" data-step="-1"
+                class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-900 font-extrabold text-base flex items-center justify-center">
+                −
+              </button>
+              <input type="number" min="0" step="1" data-qty-sl="${item.sl}" value="${cartEntry.qty || ''}" placeholder="0"
+                aria-label="Order quantity for ${escapeHtml(item.product)}"
+                class="w-14 h-8 text-center rounded-lg border border-gray-300 text-xs font-extrabold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#3c5e22]" />
+              <button type="button" data-step-sl="${item.sl}" data-step="1"
+                class="w-8 h-8 rounded-lg bg-[#3c5e22] hover:bg-[#2f4d19] active:bg-[#253d13] text-white font-extrabold text-base flex items-center justify-center">
+                +
+              </button>
+            </div>
+          </div>
+          ${cartEntry.qty > 0 ? `
+            <div class="mt-1.5 px-2.5 py-1.5 rounded-lg bg-lime-100 border border-lime-400 flex items-center justify-between text-xs font-extrabold text-[#2f4d19]">
+              <span>Cart: ${cartEntry.qty} ${cartEntry.unitMode === 'BAG' ? bagLabel : unitLabel} × ${fmtRs(currentPartyUnitRate)}${activePct > 0 ? ` (+${activePct}%)` : ''}</span>
+              <span>${fmtRs(currentTotal)}</span>
+            </div>
+          ` : ''}
+        `;
+
+        return `
+          <article class="bg-white rounded-2xl border ${cartEntry.qty > 0 ? 'border-[#3c5e22] ring-2 ring-[#3c5e22]/20' : 'border-gray-200'} shadow-xs hover:shadow-md transition p-3.5 sm:p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md bg-[#e4eedc] text-[#2f4d19] text-[11px] font-extrabold">
+                  ${escapeHtml(item.section)}
+                </span>
+                <span class="text-xs font-extrabold text-gray-500">${slBadge}</span>
+              </div>
+
+              <h2 class="mt-2 text-base font-extrabold text-gray-900 leading-snug">
+                ${escapeHtml(item.displayProduct || item.product)}
+              </h2>
+              ${item.hindiName ? `<div class="mt-0.5 text-sm font-bold text-[#3c5e22]">${escapeHtml(item.hindiName)}</div>` : ''}
+
+              <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                <span class="px-2.5 py-0.5 rounded-md bg-gray-900 text-white text-xs font-extrabold">
+                  Pack: ${escapeHtml(item.unit)}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-md bg-gray-100 text-gray-800 text-xs font-bold">
+                  ${escapeHtml(qtyDisplay)}
+                </span>
+                ${schemeBadge}
+                ${bogoBadge}
+              </div>
+              ${changeBadge ? `<div class="mt-1.5">${changeBadge}</div>` : ''}
+              ${soyabariNote}
+            </div>
+
+            <div>
+              <!-- Base Hariom Traders Rates -->
+              <div class="mt-3 pt-2.5 border-t border-gray-100 grid grid-cols-2 gap-2 text-xs">
+                <div class="bg-[#f4f9f0] border border-green-200/70 rounded-xl p-2">
+                  <div class="text-gray-600 font-semibold text-[11px]">${primaryRateLabel}</div>
+                  <div class="text-sm font-extrabold text-[#2f4d19] mt-0.5">${primaryRateVal}</div>
+                </div>
+                <div class="bg-[#f4f9f0] border border-green-200/70 rounded-xl p-2">
+                  <div class="text-gray-600 font-semibold text-[11px]">${secondaryRateLabel}</div>
+                  <div class="text-sm font-extrabold text-[#2f4d19] mt-0.5">${secondaryRateVal}</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-2">
+                  <div class="text-gray-500 font-semibold text-[11px]">RDS Landing (GST)</div>
+                  <div class="text-sm font-extrabold text-gray-900 mt-0.5">${fmtRs(item.rdsLanding)}</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-2">
+                  <div class="text-gray-500 font-semibold text-[11px]">Base Bag / Box Rate</div>
+                  <div class="text-sm font-extrabold text-gray-900 mt-0.5">${fmtIntRs(item.rdsBag)}</div>
+                </div>
+              </div>
+
+              <div class="mt-2 flex flex-wrap items-center justify-between gap-1 text-xs text-gray-700 font-semibold px-0.5">
+                <span>${isHanger ? 'Total Hangers' : 'Total Pcs'}: <strong class="text-gray-950 font-extrabold">${item.totalPc != null ? item.totalPc.toLocaleString('en-IN') + (item.freeHanger ? ' (+1 Free)' : '') : '—'}</strong></span>
+                <span>MRP: <strong class="text-gray-950 font-extrabold">${fmtRs(item.mrp)}</strong></span>
+                ${marginHtml}
+              </div>
+
+              ${pctSelectorHtml}
+              ${orderControlsHtml}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderTable(items) {
+      tableBodyEl.innerHTML = items.map(item => {
+        const isHanger = item.qtyUnit === 'HANGER';
+        const isNA = item.rdsLanding === 'N / A' || item.rdsBag === 'N / A';
+        const cartEntry = state.cart[item.sl] || { qty: 0, unitMode: 'PCS' };
+        const activePct = getItemPct(item.sl);
+        const baseSingle = getBaseSingleRate(item);
+        const partySingle = baseSingle !== null ? baseSingle * (1 + activePct / 100) : null;
+        const perPcsDisplay = isHanger ? fmtRs(baseSingle) + ' /Hgr' : fmtRs(baseSingle);
+
+        return `
+          <tr class="hover:bg-green-50/50 transition">
+            <td class="px-2.5 py-2.5 text-center font-bold text-gray-500">
+              #${item.sl}
+              ${item.sl !== item.pdfSl ? `<div class="text-[10px] text-gray-400">PDF #${item.pdfSl}</div>` : ''}
+            </td>
+            <td class="px-3 py-2.5">
+              <div class="font-extrabold text-gray-900">${escapeHtml(item.displayProduct || item.product)}</div>
+              ${item.hindiName ? `<div class="text-xs font-bold text-[#3c5e22]">${escapeHtml(item.hindiName)}</div>` : ''}
+              <div class="text-[11px] text-gray-500">${escapeHtml(item.section)}</div>
+              ${item.priceChange && item.priceChange !== 'same' ? `<div class="mt-0.5">${getChangeBadgeHtml(item)}</div>` : ''}
+            </td>
+            <td class="px-2.5 py-2.5 text-center font-extrabold text-gray-900 whitespace-nowrap">${escapeHtml(item.unit)}</td>
+            <td class="px-2.5 py-2.5 text-center text-gray-700 whitespace-nowrap">${escapeHtml(fmtQty(item))}</td>
+            <td class="px-2.5 py-2.5 text-right font-bold text-gray-900 whitespace-nowrap">${fmtRs(item.rdsLanding)}</td>
+            <td class="px-2.5 py-2.5 text-right font-extrabold text-gray-900 whitespace-nowrap">${fmtIntRs(item.rdsBag)}</td>
+            <td class="px-2.5 py-2.5 text-right font-extrabold text-[#2f4d19] whitespace-nowrap">${perPcsDisplay}</td>
+            <td class="px-2.5 py-2.5 text-right font-extrabold text-[#2f4d19] whitespace-nowrap">${fmtRs(item.perKg)}</td>
+            <td class="px-2.5 py-2.5 text-center whitespace-nowrap">
+              ${isNA ? '—' : `
+                <select data-select-pct-sl="${item.sl}" aria-label="Percentage for ${escapeHtml(item.product)}"
+                  class="px-1.5 py-1 rounded border border-gray-300 text-xs font-extrabold bg-amber-50 text-gray-900">
+                  ${PCT_OPTIONS.map(p => `<option value="${p}" ${activePct === p ? 'selected' : ''}>${p === 0 ? '0% (Base)' : '+' + p + '%'}</option>`).join('')}
+                </select>
+              `}
+            </td>
+            <td class="px-2.5 py-2.5 text-right font-extrabold text-amber-900 bg-amber-50/60 whitespace-nowrap">
+              ${partySingle !== null ? fmtRs(partySingle) + (isHanger ? '/Hgr' : '/Pc') : '—'}
+            </td>
+            <td class="px-2.5 py-2.5 text-center font-bold text-gray-900">${item.totalPc != null ? item.totalPc.toLocaleString('en-IN') : '—'}</td>
+            <td class="px-2.5 py-2.5 text-right font-bold text-gray-900 whitespace-nowrap">${fmtRs(item.mrp)}</td>
+            <td class="px-2.5 py-2.5 text-center font-extrabold text-amber-800">${item.scheme ? escapeHtml(item.scheme) : '—'}</td>
+            <td class="px-2.5 py-2.5 text-center whitespace-nowrap">
+              ${isNA ? '<span class="text-xs text-red-600 font-bold">N/A</span>' : `
+                <div class="inline-flex items-center gap-1">
+                  <button type="button" data-step-sl="${item.sl}" data-step="-1" class="w-6 h-6 rounded bg-gray-200 font-bold">−</button>
+                  <span class="w-6 text-center font-extrabold text-xs">${cartEntry.qty || 0}</span>
+                  <button type="button" data-step-sl="${item.sl}" data-step="1" class="w-6 h-6 rounded bg-[#3c5e22] text-white font-bold">+</button>
+                </div>
+              `}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function getCartEntries() {
+      return Object.entries(state.cart)
+        .map(([sl, c]) => {
+          const item = PRICE_LIST.find(i => i.sl === Number(sl));
+          if (!item || !c || !c.qty || c.qty <= 0) return null;
+          const pct = getItemPct(item.sl);
+          const baseRate = getBaseUnitOrderRate(item, c.unitMode);
+          const partyRate = getPartyUnitOrderRate(item, c.unitMode, pct);
+          const baseTotal = c.qty * baseRate;
+          const lineTotal = c.qty * partyRate;
+          return {
+            item,
+            qty: c.qty,
+            unitMode: c.unitMode,
+            pct,
+            baseRate,
+            partyRate,
+            baseTotal,
+            lineTotal
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function updateOrderBarAndModal() {
+      const entries = getCartEntries();
+
+      if (entries.length === 0) {
+        orderBottomBar.classList.add('hidden');
+        orderModal.classList.add('hidden');
+        return;
+      }
+
+      orderBottomBar.classList.remove('hidden');
+      const baseGrand = entries.reduce((acc, e) => acc + e.baseTotal, 0);
+      const partyGrand = entries.reduce((acc, e) => acc + e.lineTotal, 0);
+      const extraMargin = partyGrand - baseGrand;
+
+      orderBarCount.textContent = `${entries.length} Item${entries.length > 1 ? 's' : ''}`;
+      orderBarTotal.textContent = fmtRs(partyGrand);
+      orderBarSub.textContent = extraMargin > 0
+        ? `Base: ${fmtRs(baseGrand)} + Margin/Bhada: ${fmtRs(extraMargin)}`
+        : entries.map(e => `${e.item.product.split('(')[0].trim()} (${e.qty})`).join(', ');
+
+      orderModalBaseSummary.textContent = `Base Rate (Hariom Traders): ${fmtRs(baseGrand)} • Extra Bhada/Margin: +${fmtRs(extraMargin)}`;
+      orderModalGrandTotal.textContent = fmtRs(partyGrand);
+
+      toggleSlipBreakdownBtn.textContent = state.showSlipBreakdown
+        ? 'Yes (Show % Details)'
+        : 'No (Only Final Rate)';
+      toggleSlipBreakdownBtn.className = state.showSlipBreakdown
+        ? 'px-2.5 py-1 rounded-md text-xs font-extrabold bg-[#3c5e22] text-white'
+        : 'px-2.5 py-1 rounded-md text-xs font-extrabold bg-gray-200 text-gray-800';
+
+      // Render bulk % bar inside Cart Modal
+      cartBulkPctBar.innerHTML = PCT_OPTIONS.map(p => {
+        const allMatch = entries.every(e => e.pct === p);
+        return `<button type="button" data-cart-bulk-pct="${p}"
+          class="shrink-0 px-2 py-1 rounded-md text-xs font-extrabold transition ${
+            allMatch
+              ? 'bg-amber-400 text-gray-950 border border-amber-500 shadow-xs'
+              : 'bg-white text-gray-700 border border-amber-200 hover:bg-amber-100'
+          }">
+          ${p === 0 ? '0%' : '+' + p + '%'}
+        </button>`;
+      }).join('');
+
+      orderModalList.innerHTML = entries.map(e => {
+        const isHanger = e.item.qtyUnit === 'HANGER';
+        const bagLabel = e.item.packType && e.item.packType.includes('BOX') ? 'Box' : 'Bag';
+        const unitLabel = isHanger ? 'Hanger' : 'Pcs';
+        const modeLabel = e.unitMode === 'BAG' ? bagLabel : unitLabel;
+
+        return `
+          <div class="py-2.5 flex flex-col gap-2">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <div class="text-xs sm:text-sm font-extrabold text-gray-900">
+                  #${e.item.sl} ${escapeHtml(e.item.displayProduct || e.item.product)} <span class="text-[#3c5e22]">(${escapeHtml(e.item.unit)})</span>
+                </div>
+                <div class="text-[11px] font-semibold text-gray-600 mt-0.5">
+                  Base: ${fmtRs(e.baseRate)}/${modeLabel}
+                  ${e.pct > 0 ? ` &rarr; <strong class="text-amber-900 bg-amber-100 px-1.5 py-0.5 rounded">Party Rate (+${e.pct}%): ${fmtRs(e.partyRate)}/${modeLabel}</strong>` : ''}
+                  &bull; MRP: ${fmtRs(e.item.mrp)}
+                </div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-sm font-extrabold text-[#2f4d19]">${fmtRs(e.lineTotal)}</div>
+                ${e.pct > 0 ? `<div class="text-[10px] font-bold text-emerald-700">+${fmtRs(e.lineTotal - e.baseTotal)} margin</div>` : ''}
+              </div>
+            </div>
+
+            <!-- Controls inside Cart Modal: Mode, % Selector, Qty Stepper -->
+            <div class="flex flex-wrap items-center justify-between gap-2 bg-gray-50 px-2.5 py-1.5 rounded-xl border border-gray-200/80">
+              <div class="inline-flex rounded-lg bg-white border border-gray-200 p-0.5 text-[11px] font-bold">
+                <button type="button" data-mode-sl="${e.item.sl}" data-mode="PCS"
+                  class="px-2 py-0.5 rounded-md ${e.unitMode === 'PCS' ? 'bg-[#3c5e22] text-white' : 'text-gray-700'}">
+                  ${unitLabel}
+                </button>
+                <button type="button" data-mode-sl="${e.item.sl}" data-mode="BAG"
+                  class="px-2 py-0.5 rounded-md ${e.unitMode === 'BAG' ? 'bg-[#3c5e22] text-white' : 'text-gray-700'}">
+                  ${bagLabel}
+                </button>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-bold text-gray-600">Margin %:</span>
+                <select data-select-pct-sl="${e.item.sl}" aria-label="Cart percentage for ${escapeHtml(e.item.product)}"
+                  class="px-2 py-1 rounded-lg border border-amber-300 bg-amber-50 text-xs font-extrabold text-gray-900">
+                  ${PCT_OPTIONS.map(p => `<option value="${p}" ${e.pct === p ? 'selected' : ''}>${p === 0 ? '0% (Base)' : '+' + p + '%'}</option>`).join('')}
+                </select>
+              </div>
+
+              <div class="inline-flex items-center gap-1">
+                <button type="button" data-step-sl="${e.item.sl}" data-step="-1" class="w-7 h-7 rounded-lg bg-gray-200 font-extrabold">−</button>
+                <input type="number" min="0" step="1" data-qty-sl="${e.item.sl}" value="${e.qty}"
+                  aria-label="Cart quantity for ${escapeHtml(e.item.product)}"
+                  class="w-12 h-7 text-center rounded-lg border border-gray-300 text-xs font-extrabold bg-white" />
+                <button type="button" data-step-sl="${e.item.sl}" data-step="1" class="w-7 h-7 rounded-lg bg-[#3c5e22] text-white font-extrabold">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function buildOrderSlipText() {
+      const entries = getCartEntries();
+      const party = (partyNameInput.value || '').trim() || 'Party Order';
+      const loc = (partyLocationInput.value || '').trim();
+      const mob = (partyMobileInput.value || '').trim();
+
+      const lines = [
+        `*MANPASAND AGRO FOOD PVT LTD*`,
+        `*Distributor: Hariom Traders (Godda)*`,
+        `--------------------------------`,
+        `🏪 *Party / Shop:* ${party}`
+      ];
+      if (loc) lines.push(`📍 *Address / Market:* ${loc}`);
+      if (mob) lines.push(`📞 *Mobile No:* ${mob}`);
+      lines.push(`📅 *Price List:* 15-11-2026 to 30-11-2026`);
+      lines.push(`--------------------------------`);
+
+      let baseGrand = 0;
+      let partyGrand = 0;
+
+      entries.forEach((e, idx) => {
+        const isHanger = e.item.qtyUnit === 'HANGER';
+        const bagLabel = e.item.packType && e.item.packType.includes('BOX') ? 'Box' : 'Bag';
+        const modeLabel = e.unitMode === 'BAG' ? bagLabel : (isHanger ? 'Hanger' : 'Pcs');
+        baseGrand += e.baseTotal;
+        partyGrand += e.lineTotal;
+
+        const mrpStr = e.item.mrp ? ` (MRP ₹${e.item.mrp})` : '';
+        if (state.showSlipBreakdown && e.pct > 0) {
+          lines.push(
+            `${idx + 1}. *${e.item.product}* [${e.item.unit}]${mrpStr}
+   Qty: *${e.qty} ${modeLabel}* × ₹${e.partyRate.toFixed(2)} (Base ₹${e.baseRate.toFixed(2)} + ${e.pct}%) = *₹${e.lineTotal.toFixed(2)}*`
+          );
+        } else {
+          lines.push(
+            `${idx + 1}. *${e.item.product}* [${e.item.unit}]${mrpStr}
+   Qty: *${e.qty} ${modeLabel}* × ₹${e.partyRate.toFixed(2)} = *₹${e.lineTotal.toFixed(2)}*`
+          );
+        }
+      });
+
+      lines.push(`--------------------------------`);
+      if (state.showSlipBreakdown && partyGrand > baseGrand) {
+        lines.push(`Base Total (Hariom Rate): ₹${baseGrand.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+        lines.push(`Added Bhada / Margin: +₹${(partyGrand - baseGrand).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+      }
+      lines.push(`*GRAND TOTAL (Incl. GST): ₹${partyGrand.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}*`);
+      lines.push(`Order Taken By: *Mohd Aaftab (8505980079)*`);
+      return lines.join('\n');
+    }
+
+    function render() {
+      const items = getFilteredItems();
+      clearSearchBtn.classList.toggle('hidden', state.query.trim() === '');
+
+      renderQuickChips();
+      renderCategoryTabs();
+
+      resultSummaryEl.textContent = `Showing ${items.length} of ${PRICE_LIST.length} items`;
+
+      viewCardsBtn.className = state.viewMode === 'cards'
+        ? 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#2f4d19] shadow-sm'
+        : 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-[#2f4d19] text-white hover:bg-[#253d13]';
+      viewTableBtn.className = state.viewMode === 'table'
+        ? 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#2f4d19] shadow-sm'
+        : 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition bg-[#2f4d19] text-white hover:bg-[#253d13]';
+
+      if (items.length === 0) {
+        cardsContainerEl.classList.add('hidden');
+        tableContainerEl.classList.add('hidden');
+        emptyStateEl.classList.remove('hidden');
+      } else {
+        emptyStateEl.classList.add('hidden');
+        if (state.viewMode === 'cards') {
+          cardsContainerEl.classList.remove('hidden');
+          tableContainerEl.classList.add('hidden');
+          renderCards(items);
+        } else {
+          cardsContainerEl.classList.add('hidden');
+          tableContainerEl.classList.remove('hidden');
+          renderTable(items);
+        }
+      }
+
+      updateOrderBarAndModal();
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      state.query = e.target.value;
+      render();
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      state.query = '';
+      searchInput.value = '';
+      searchInput.focus();
+      render();
+    });
+
+    quickChipsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-quick]');
+      if (!btn) return;
+      const q = btn.getAttribute('data-quick');
+      state.query = state.query.toLowerCase() === q.toLowerCase() ? '' : q;
+      searchInput.value = state.query;
+      render();
+    });
+
+    categoryTabsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-cat]');
+      if (!btn) return;
+      state.category = btn.getAttribute('data-cat');
+      render();
+    });
+
+    globalPctBarEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-global-pct]');
+      if (!btn) return;
+      const pct = Number(btn.getAttribute('data-global-pct')) || 0;
+      state.globalPct = pct;
+      state.itemPct = {};
+      saveState();
+      render();
+      showToast(pct === 0 ? 'All items reset to Base Rate (0%)' : `All items set to +${pct}% Party Rate`);
+    });
+
+    cartBulkPctBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-cart-bulk-pct]');
+      if (!btn) return;
+      const pct = Number(btn.getAttribute('data-cart-bulk-pct')) || 0;
+      Object.keys(state.cart).forEach(sl => {
+        state.itemPct[sl] = pct;
+      });
+      saveState();
+      render();
+      showToast(pct === 0 ? 'Cart items set to Base Rate (0%)' : `Cart items set to +${pct}%`);
+    });
+
+    changedFilterBtn.addEventListener('click', () => {
+      state.onlyChanged = !state.onlyChanged;
+      render();
+    });
+
+    viewCardsBtn.addEventListener('click', () => {
+      state.viewMode = 'cards';
+      render();
+    });
+
+    viewTableBtn.addEventListener('click', () => {
+      state.viewMode = 'table';
+      render();
+    });
+
+    resetAllBtn.addEventListener('click', () => {
+      state.query = '';
+      state.category = 'ALL';
+      state.onlyChanged = false;
+      searchInput.value = '';
+      render();
+    });
+
+    // Save party inputs on change/input
+    [partyNameInput, partyLocationInput, partyMobileInput].forEach(inp => {
+      inp.addEventListener('input', () => {
+        state.partyName = partyNameInput.value;
+        state.partyLocation = partyLocationInput.value;
+        state.partyMobile = partyMobileInput.value;
+        saveState();
+      });
+    });
+
+    toggleSlipBreakdownBtn.addEventListener('click', () => {
+      state.showSlipBreakdown = !state.showSlipBreakdown;
+      saveState();
+      updateOrderBarAndModal();
+    });
+
+    // Event delegation for per-item % buttons, mode buttons, and qty stepper buttons
+    document.addEventListener('click', (e) => {
+      const pctBtn = e.target.closest('button[data-item-pct-sl]');
+      if (pctBtn) {
+        const sl = Number(pctBtn.getAttribute('data-item-pct-sl'));
+        const pct = Number(pctBtn.getAttribute('data-pct')) || 0;
+        state.itemPct[sl] = pct;
+        saveState();
+        render();
+        return;
+      }
+
+      const modeBtn = e.target.closest('button[data-mode-sl]');
+      if (modeBtn) {
+        const sl = Number(modeBtn.getAttribute('data-mode-sl'));
+        const mode = modeBtn.getAttribute('data-mode');
+        const cur = state.cart[sl] || { qty: 0, unitMode: 'PCS' };
+        state.cart[sl] = { qty: cur.qty, unitMode: mode };
+        saveState();
+        render();
+        return;
+      }
+
+      const stepBtn = e.target.closest('button[data-step-sl]');
+      if (stepBtn) {
+        const sl = Number(stepBtn.getAttribute('data-step-sl'));
+        const delta = Number(stepBtn.getAttribute('data-step'));
+        const cur = state.cart[sl] || { qty: 0, unitMode: 'PCS' };
+        const nextQty = Math.max(0, (Number(cur.qty) || 0) + delta);
+        if (nextQty === 0) {
+          delete state.cart[sl];
+        } else {
+          state.cart[sl] = { qty: nextQty, unitMode: cur.unitMode || 'PCS' };
+        }
+        saveState();
+        render();
+      }
+    });
+
+    document.addEventListener('change', (e) => {
+      const pctSelect = e.target.closest('select[data-select-pct-sl]');
+      if (pctSelect) {
+        const sl = Number(pctSelect.getAttribute('data-select-pct-sl'));
+        const pct = Number(pctSelect.value) || 0;
+        state.itemPct[sl] = pct;
+        saveState();
+        render();
+        return;
+      }
+
+      const qtyInput = e.target.closest('input[data-qty-sl]');
+      if (qtyInput) {
+        const sl = Number(qtyInput.getAttribute('data-qty-sl'));
+        const val = Math.max(0, parseInt(qtyInput.value, 10) || 0);
+        const cur = state.cart[sl] || { qty: 0, unitMode: 'PCS' };
+        if (val === 0) {
+          delete state.cart[sl];
+        } else {
+          state.cart[sl] = { qty: val, unitMode: cur.unitMode || 'PCS' };
+        }
+        saveState();
+        render();
+      }
+    });
+
+    clearOrderBarBtn.addEventListener('click', () => {
+      state.cart = {};
+      saveState();
+      render();
+      showToast('Order cleared');
+    });
+
+    openOrderModalBtn.addEventListener('click', () => {
+      updateOrderBarAndModal();
+      orderModal.classList.remove('hidden');
+    });
+
+    closeOrderModalBtn.addEventListener('click', () => {
+      orderModal.classList.add('hidden');
+    });
+
+    copyOrderBtn.addEventListener('click', () => {
+      const text = buildOrderSlipText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Order copied for WhatsApp!');
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    });
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('Order copied for WhatsApp!');
+      } catch (err) {}
+      document.body.removeChild(ta);
+    }
+
+    whatsappShareBtn.addEventListener('click', () => {
+      const text = buildOrderSlipText();
+      const url = 'https://wa.me/?text=' + encodeURIComponent(text);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    // Keep the category bar directly under the sticky header
+    const headerEl = document.querySelector('header');
+    const categoryBarEl = document.getElementById('categoryBar');
+    function syncStickyOffset() {
+      if (headerEl && categoryBarEl) {
+        categoryBarEl.style.top = headerEl.offsetHeight + 'px';
+      }
+    }
+    window.addEventListener('resize', syncStickyOffset);
+
+    render();
+    syncStickyOffset();
+  </script>
+</body>
+</html>
